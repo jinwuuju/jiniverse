@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang='ko'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1, viewport-fit=cover'>
+<title>JINIVERSE · 진짜 나의 우주를 찾는 16가지 궤도</title>
+<meta name='description' content='70개의 일상 장면으로 당신이 도는 16개의 궤도를 찾는 JINIVERSE 성격 유형 검사'>
+<meta name='theme-color' content='#050507'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css'>
+<style>
+:root{--bg:#050507;--tx:#F2F3F7;--mu:rgba(242,243,247,.62);--dim:rgba(242,243,247,.38);--a:#8B7CFF;--b:#3DD6E0;--glass:rgba(255,255,255,.045);--glass2:rgba(255,255,255,.08);--line:rgba(255,255,255,.09);--line2:rgba(255,255,255,.18);--warn:#F5C26B}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:Pretendard,-apple-system,BlinkMacSystemFont,sans-serif;-webkit-font-smoothing:antialiased;min-height:100%}
+body::before{content:'';position:fixed;inset:-20%;pointer-events:none;z-index:0;background:radial-gradient(40% 35% at 18% 12%,rgba(139,124,255,.32),transparent 70%),radial-gradient(38% 32% at 88% 78%,rgba(61,214,224,.20),transparent 70%),radial-gradient(30% 25% at 70% 20%,rgba(255,120,200,.10),transparent 70%);filter:blur(30px)}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;background-image:radial-gradient(1px 1px at 12% 18%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 78% 12%,#fff 50%,transparent 51%),radial-gradient(1.4px 1.4px at 62% 44%,#d9d3ff 50%,transparent 51%),radial-gradient(1px 1px at 28% 72%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 88% 56%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 45% 90%,#fff 50%,transparent 51%),radial-gradient(1.4px 1.4px at 6% 52%,#fff 50%,transparent 51%),radial-gradient(1px 1px at 94% 88%,#c9f6ff 50%,transparent 51%),radial-gradient(1px 1px at 36% 8%,#fff 50%,transparent 51%)}
+main{max-width:640px;margin:0 auto;padding:40px 20px 100px;position:relative;z-index:1}
+p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;padding:0}
+.glass{background:var(--glass);border:1px solid var(--line);border-radius:22px;backdrop-filter:blur(24px) saturate(140%);-webkit-backdrop-filter:blur(24px) saturate(140%);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)}
+.pad{padding:24px}
+.eb{font-size:12px;letter-spacing:.14em;color:var(--dim)}
+.mu{color:var(--mu)}
+.pill{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.06em;color:var(--mu);padding:7px 14px;border-radius:999px}
+.pill i{width:6px;height:6px;border-radius:50%;background:var(--a);box-shadow:0 0 10px var(--a)}
+h1{font-size:40px;font-weight:700;line-height:1.25;letter-spacing:-.03em;margin:22px 0 16px;background:linear-gradient(180deg,#fff 30%,rgba(255,255,255,.55));-webkit-background-clip:text;background-clip:text;color:transparent}
+h2{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
+.lead{color:var(--mu);font-size:16px;line-height:1.75}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:24px 0 30px}
+.chip{font-size:13px;color:var(--mu);padding:7px 13px;border-radius:999px}
+.cta{display:block;width:100%;height:58px;border-radius:16px;background:#fff;color:#08080b;font-size:16px;font-weight:700;transition:transform .15s,box-shadow .2s;box-shadow:0 8px 30px rgba(139,124,255,.25)}
+.cta:hover{box-shadow:0 10px 40px rgba(139,124,255,.4)}
+.cta:active{transform:scale(.98)}
+.sub{display:block;width:100%;height:52px;border-radius:16px;font-size:15px;margin-top:10px;transition:border-color .2s,background .2s}
+.sub:hover{border-color:var(--line2);background:var(--glass2)}
+.back{color:var(--mu);font-size:14px;padding:6px 0}
+.back:hover{color:var(--tx)}
+.hr{height:1px;background:var(--line);border:0;margin:40px 0}
+.li{display:flex;gap:14px;font-size:15px;line-height:1.7;padding:14px 0;border-top:1px solid var(--line)}
+.li:first-child{border-top:0;padding-top:0}
+.li b{color:var(--a);font-weight:600;min-width:22px}
+.foot{font-size:12px;color:var(--dim);line-height:1.7;margin-top:32px}
+.segs{display:flex;gap:4px}
+.seg{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+.seg>i{display:block;height:100%;background:linear-gradient(90deg,var(--a),var(--b));transition:width .35s}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:26px 0 30px}
+.opt{border-radius:16px;padding:16px;font-size:15px;line-height:1.55;transition:all .25s;position:relative;text-align:left;width:100%;cursor:pointer}
+.opt:hover{border-color:var(--line2)}
+.opt .k{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;margin-bottom:6px}
+.opt.A .k{color:var(--a)}.opt.B .k{color:var(--b)}
+.opt.A.lean{border-color:rgba(139,124,255,.7);background:rgba(139,124,255,.12)}
+.opt.B.lean{border-color:rgba(61,214,224,.7);background:rgba(61,214,224,.10)}
+.scale{display:flex;justify-content:space-between;align-items:center;max-width:420px;margin:0 auto}
+.dot{border-radius:50%;border:1.5px solid;transition:all .18s;flex:none;background:transparent}
+.dot:hover{transform:scale(1.08)}
+.dot.on{transform:scale(1.05)}
+.scl{display:flex;justify-content:space-between;max-width:440px;margin:12px auto 0;font-size:12px;color:var(--dim)}
+.fade{animation:fd .4s cubic-bezier(.2,.8,.2,1)}
+@keyframes fd{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.pledge{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:16px;margin-bottom:10px;cursor:pointer;font-size:15px;line-height:1.55;transition:all .2s}
+.pledge.on{border-color:rgba(139,124,255,.6);background:rgba(139,124,255,.10)}
+.pledge input{accent-color:var(--a);width:18px;height:18px;margin:2px 0 0;flex:none}
+.err{color:#FF8E8E;font-size:13px;min-height:18px;margin-top:10px}
+.cmp{padding:18px 0;border-top:1px solid var(--line)}
+.cmp .x{color:var(--dim);text-decoration:line-through;font-size:14px;line-height:1.6;margin-top:6px}
+.cmp .o{font-size:14px;line-height:1.6;margin-top:4px}
+.pop{border-radius:999px;padding:11px 18px;font-size:15px;margin:0 8px 8px 0;transition:all .2s}
+.pop.on{border-color:rgba(139,124,255,.7);background:rgba(139,124,255,.14)}
+.code{font-size:76px;font-weight:800;letter-spacing:.1em;line-height:1;margin:16px 0 10px;background:linear-gradient(90deg,#fff,#d9d3ff 50%,#c9f6ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.tag{font-size:12px;padding:4px 10px;border-radius:999px;border:1px solid var(--line2);color:var(--mu)}
+.tag.w{border-color:rgba(245,194,107,.6);color:var(--warn)}
+.bar{height:8px;border-radius:8px;overflow:hidden;display:flex;background:rgba(255,255,255,.06)}
+.bar>.l{background:var(--a)}.bar>.r{background:var(--b);flex:1;opacity:.85}
+.fac{display:grid;grid-template-columns:92px 1fr 20px;gap:12px;align-items:center;margin:12px 0;font-size:13px}
+.ev{border-left:2px solid var(--a);padding:2px 0 2px 12px;margin:12px 0;font-size:14px;line-height:1.6}
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+.metric{padding:16px;border-radius:16px}
+.metric p+p{font-size:24px;font-weight:700;margin-top:4px}
+.g16{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px}
+.tb{text-align:left;padding:14px;border-radius:16px;line-height:1.45;transition:all .2s}
+.tb:hover,.tb.on{border-color:rgba(139,124,255,.7);background:rgba(139,124,255,.10)}
+.sec{padding:18px 0;border-top:1px solid var(--line)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:18px 0}
+.nav{position:sticky;top:12px;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:6px;border-radius:999px;margin:20px 0 8px;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav button{flex:none;font-size:13px;color:var(--mu);padding:8px 14px;border-radius:999px;transition:all .2s}
+.nav button:hover{color:var(--tx);background:var(--glass2)}
+.letters{display:flex;gap:18px;font-size:13px;color:var(--mu);margin-bottom:22px}
+.shareimg{width:100%;max-width:280px;display:block;margin:16px auto 0;border-radius:18px;border:1px solid var(--line)}
+@media(max-width:480px){h1{font-size:32px}.code{font-size:58px}.two{grid-template-columns:1fr}.opt{padding:13px;font-size:14px}.pad{padding:20px}}
+</style>
+</head>
+<body>
+<main id='app'></main>
+<script>
+const Q=[['EI1','E','한 주 내내 일이 몰아쳤던 금요일 저녁, 지친 나를 회복시키는 건','누군가를 만나 실컷 떠들어야 비로소 풀린다','아무도 없는 내 공간에서 조용히 쉬어야 풀린다'],['EI1','I','하루 종일 미팅과 행사로 사람을 만난 날, 집에 돌아온 직후 내 상태는','배터리가 바닥이라 일단 혼자 조용히 충전해야 한다','오히려 텐션이 올라 있어 누구와 더 얘기하고 싶다'],['EI1','E','약속 없는 토요일 오후, 친한 친구가 ‘지금 나올래?’ 하고 연락했다','오 좋아, 바로 준비하고 나간다','반갑지만 오늘 집에서 쉬려던 계획이 먼저 떠오른다'],['EI1','I','아무 제약 없는 연휴 5일이 생겼다면','대부분을 혼자 또는 아주 가까운 한두 명과 느긋하게 보낸다','매일 다른 사람들과 약속을 잡아 알차게 채운다'],['EI2','E','복잡한 고민이 생겼을 때 나는 보통','누군가에게 말하다 보면 생각이 정리된다','혼자 충분히 정리한 뒤에야 남에게 말할 수 있다'],['EI2','I','회의에서 예상 못 한 질문을 받았다','잠깐 생각할 시간을 갖거나, 정리해서 나중에 답하고 싶다','말하면서 생각을 맞춰가며 바로 답하는 편이다'],['EI2','E','단톡방에서 내 의견을 물었다','떠오르는 대로 바로 보내고, 대화하며 다듬는다','생각을 다 정리한 뒤 한 번에 정돈된 메시지를 보낸다'],['EI2','I','좋은 아이디어가 떠올랐을 때','혼자 충분히 굴려본 뒤에 꺼내놓는다','바로 누군가에게 말하며 살을 붙인다'],['EI3','E','나의 인간관계를 그림으로 그린다면','넓게 퍼진 그물: 다양한 사람과 두루 아는 사이','작고 촘촘한 원: 소수와 깊게 아는 사이'],['EI3','I','지인의 지인들이 모인 처음 가는 모임에서 나는','아는 한두 명 곁에서 깊은 대화를 나눈다','이 사람 저 사람과 인사하며 자연스럽게 돌아다닌다'],['EI3','E','새 회사나 학교에 들어간 첫 주','먼저 말 걸고 점심 같이 먹자고 하며 빠르게 친해진다','분위기를 보며 자연스럽게 가까워질 사람이 생기길 기다린다'],['EI3','I','주말 약속을 하나만 고른다면','오랜 친구 한 명과 카페에서 3시간 대화','여러 무리가 섞인 바비큐 파티에서 3시간'],['EI4','E','일이나 공부를 할 때 집중이 잘 되는 곳','적당히 사람 소리가 나는 카페나 열린 공간','조용하고 방해받지 않는 나만의 공간'],['EI4','I','생일 축하나 건배사로 모두의 시선이 나에게 쏠렸다','고맙지만 이 순간이 빨리 지나갔으면 좋겠다','은근히 즐긴다, 한마디 더 하고 싶어진다'],['EI4','E','급하지 않은 용건을 전할 때 더 편한 방법','전화나 음성으로 바로 주고받는 게 편하다','문자로 생각을 정리해서 보내는 게 편하다'],['EI4','I','여행지에서 자유 시간이 하루 생겼다','한적한 동네를 천천히 걸으며 혼자만의 시간을 갖는다','시장이나 축제처럼 북적이고 활기찬 곳을 누빈다'],['SN1','S','처음 가는 동네에서 밥집을 고를 때 더 믿는 것','리뷰 수, 별점, 실제 메뉴 사진 같은 구체적 정보','간판, 분위기, 골목에서 오는 ‘여기다’ 하는 느낌'],['SN1','N','누군가의 이야기를 들을 때 나는','말 사이에 숨은 의도나 맥락을 먼저 읽는다','실제로 한 말을 그대로 받아들이는 편이다'],['SN1','S','새로 산 가전이나 앱을 처음 쓸 때','기본 기능과 사용법부터 차근차근 확인한다','이것저것 눌러보며 전체 구조를 감으로 파악한다'],['SN1','N','중요한 판단을 내릴 때 결국 더 믿게 되는 쪽','설명하긴 어렵지만 강하게 오는 직감','직접 보고 겪어서 확인한 사실'],['SN1','S','친구가 ‘어제 만난 그 사람 어땠어?’ 하고 묻는다. 내 대답은 주로','키, 옷차림, 무슨 말을 했는지 같은 구체적인 묘사','‘뭔가 자유로운 영혼 같은 느낌?’ 같은 전체적인 인상'],['SN2','N','멍하니 있을 때 머릿속에 주로 떠오르는 것','‘만약 ~라면?’ 하는 상상과 미래 시나리오','오늘 있었던 일, 해야 할 일, 지금 주변의 것들'],['SN2','S','5년 뒤 계획을 이야기할 때 나는','지금 상황에서 현실적으로 가능한 다음 단계부터 말한다','어떤 모습이 되고 싶은지 큰 그림부터 말한다'],['SN2','N','친구들과의 대화가 가장 즐거울 때','‘외계인이 진짜 있다면?’ 같은 가설로 끝없이 뻗어갈 때','실제 겪은 일, 맛집, 근황처럼 생생한 이야기를 나눌 때'],['SN2','S','산책할 때 나는 주로','바람, 냄새, 지나가는 사람들 등 주변을 생생하게 느낀다','생각에 빠져 어디를 걸었는지 잘 기억나지 않는다'],['SN3','S','남에게 길을 알려줄 때','‘편의점 지나 두 번째 골목에서 오른쪽, 빨간 간판’처럼 단계별로','‘역에서 북쪽, 큰길 따라가면 나와’처럼 방향 위주로'],['SN3','N','새로운 걸 배울 때 이해가 잘 되는 순서','전체 원리와 큰 그림을 먼저 듣고 세부로 들어갈 때','구체적인 예시와 실습부터 해보고 원리를 알게 될 때'],['SN3','S','재밌게 본 영화를 친구에게 소개할 때','줄거리와 인상 깊은 장면을 순서대로 이야기한다','이 영화가 말하려는 주제나 상징을 이야기한다'],['SN3','N','누군가 비유를 잔뜩 섞어 설명할 때','오히려 확 와닿는다','그래서 정확히 무엇을 하라는 건지 다시 묻고 싶다'],['SN4','S','자주 가던 식당에 갔다','늘 먹던, 맛이 보장된 메뉴를 시킨다','안 먹어본 메뉴가 궁금해서 새로 시켜본다'],['SN4','N','이미 잘 돌아가는 업무 방식이 있다면','더 나은 방식이 없을까 자꾸 바꿔보고 싶다','굳이 바꾸지 않고 검증된 방법을 정확하게 쓴다'],['SN4','S','요리를 할 때 나는','레시피의 계량과 순서를 지키는 편이다','레시피는 참고만 하고 내 식대로 응용한다'],['SN4','N','새로운 기술이나 트렌드가 등장하면','앞으로 무엇이 바뀔지 상상하며 설렌다','실제로 쓸모가 증명될 때까지 지켜본다'],['TF1','T','팀에서 한 명을 프로젝트에서 빼야 한다면 가장 중요하게 볼 것','성과와 역량 같은 가장 객관적인 기준','그 결정이 각자와 팀 분위기에 미칠 영향'],['TF1','F','이직이나 이사 같은 큰 결정 앞에서 마지막에 나를 움직이는 것','이게 내 마음에 맞는지, 소중한 사람들에게 좋은지','장단점을 따졌을 때 무엇이 가장 합리적인지'],['TF1','T','친구가 두 선택지 사이에서 고민하며 조언을 구한다','각 선택의 장단점과 예상 결과를 정리해 준다','친구가 진짜 원하는 게 뭔지 마음부터 들여다보게 돕는다'],['TF1','F','비슷한 물건 두 개 중 하나를 고를 때 결정적인 이유','만든 사람의 이야기나 가치가 마음에 들어서','기능과 가격을 비교했을 때 가장 합리적이어서'],['TF1','T','토론에서 내 말이 논리적으로 맞는데, 상대가 상처받은 것 같다','감정과 별개로 맞는 건 맞다고 정리하고 싶다','이기는 것보다 관계가 중요하니 여기서 물러선다'],['TF2','F','친구가 공들인 발표 자료를 보여주며 ‘어때?’ 묻는다. 구조에 큰 문제가 보인다','잘한 점부터 충분히 말하고, 문제는 조심스럽게 전한다','시간이 아까우니 문제점부터 명확하게 짚어준다'],['TF2','T','내가 피드백을 받을 때 더 고마운 쪽','돌려 말하지 않고 무엇이 문제인지 정확히 알려주는 피드백','내 노력을 먼저 알아주고 부드럽게 방향을 제시하는 피드백'],['TF2','F','후배의 실수를 짚어줘야 한다','기분이 상하지 않을 타이밍과 말투를 먼저 고민한다','무엇이 왜 틀렸고 어떻게 고칠지 명확히 전달하는 데 집중한다'],['TF2','T','솔직함과 다정함 중 더 중요한 미덕을 하나 고른다면','솔직함: 듣기 싫어도 진실을 말해주는 것','다정함: 진실도 상대가 받아들일 수 있게 전하는 것'],['TF2','F','누군가 내 의견에 정면으로 반박했다','혹시 나한테 서운한 게 있나, 관계가 먼저 신경 쓰인다','논리가 맞는지 따져볼 흥미로운 기회로 느낀다'],['TF3','T','친구가 ‘오늘 상사한테 엄청 혼났어’라며 연락했다. 내 첫마디는','‘왜? 무슨 일 때문에?’ 상황부터 파악한다','‘헐 괜찮아? 속상했겠다’ 마음부터 챙긴다'],['TF3','F','친구가 고민을 털어놓을 때 내가 주로 하는 역할','충분히 들어주고 감정에 공감해 준다','원인을 분석하고 해결책을 제시한다'],['TF3','T','단체 여행 중에 두 친구가 다퉜다','사실관계를 정리해서 문제의 원인부터 풀려고 한다','양쪽 마음을 달래며 분위기부터 회복시키려 한다'],['TF3','F','여운이 긴 영화를 보고 나와서 친구와 이야기할 때','인물의 감정과 내가 느낀 감정을 나눈다','설정의 개연성과 연출이 잘됐는지를 이야기한다'],['TF3','T','가까운 사람이 눈앞에서 울고 있다','무엇이 문제인지 알아야 도울 수 있으니 차분히 묻는다','이유는 나중이고, 일단 말없이 옆에 있어 준다'],['TF4','F','모임 회비를 정할 때 형편이 어려운 친구가 있다','사정에 맞게 조정해 주는 게 맞다','예외가 생기면 끝이 없으니 모두 똑같이 낸다'],['TF4','T','규칙을 어긴 사람의 사정이 딱하다','안타깝지만 규칙은 누구에게나 똑같이 적용되어야 한다','규칙도 결국 사람을 위한 것이니 예외를 둘 수 있다'],['TF4','F','팀 보너스를 나눠야 한다면','모두 고생했으니 비슷하게, 관계가 상하지 않도록','기여도에 따라 정확히 차등하는 것이 공정하다'],['TF4','T','내가 평가자가 된다면 되고 싶은 모습','누구에게나 같은 잣대를 적용하는 일관된 평가자','각자의 상황과 성장까지 헤아리는 평가자'],['JP1','J','여행을 준비할 때','날짜별 일정과 동선, 예약까지 미리 짜둬야 마음이 편하다','숙소와 큰 방향만 정하고 나머지는 가서 정한다'],['JP1','P','주말을 앞둔 금요일 밤','딱히 계획 없이 그때그때 끌리는 걸 할 생각이다','토요일과 일요일에 뭘 할지 대략 정해 두었다'],['JP1','J','친구의 즉흥 제안처럼 계획에 없던 일이 생겼다','정해둔 흐름이 깨져서 살짝 불편하다','오히려 신난다, 계획은 바꾸라고 있는 것'],['JP1','P','하루를 시작할 때','그날 컨디션과 상황을 보며 흐름대로 움직인다','오늘 할 일을 머릿속이나 목록으로 정리하고 시작한다'],['JP1','J','여행 중 가려던 식당이 문을 닫았다','미리 찾아둔 다음 후보로 이동한다','근처를 걷다가 끌리는 곳에 들어간다'],['JP2','P','2주 뒤가 마감인 과제가 생겼다','마감이 가까워져야 집중력이 폭발한다','일정을 나눠 미리미리 조금씩 끝내 둔다'],['JP2','J','마감 3일 전, 일이 거의 끝났다','빨리 마무리해서 제출하고 홀가분해지고 싶다','남은 시간에 더 좋은 아이디어가 나올 수 있으니 열어둔다'],['JP2','P','약속 장소로 출발할 때 나는','상황을 보고 움직이며 이동 중에 시간을 맞춘다','몇 시에 나가야 할지 미리 계산해 두고 그대로 움직인다'],['JP2','J','할 일이 여러 개 쌓였을 때','우선순위를 정하고 순서대로 하나씩 끝낸다','그때그때 손이 가는 것부터 여러 개를 동시에 진행한다'],['JP3','P','중요한 선택을 할 때 나는','정보가 더 들어올 수 있으니 최대한 늦게까지 열어둔다','적당히 따져봤으면 빨리 정하고 다음으로 넘어간다'],['JP3','J','친구들과 저녁 메뉴를 정하는 중','결론 없이 길어지면 답답해서 내가 정리해 버린다','이것저것 얘기하며 고르는 과정 자체도 재밌다'],['JP3','P','온라인 쇼핑에서 비슷한 상품 두 개 사이에서','장바구니에 둘 다 넣어두고 며칠 더 고민한다','기준을 정해 비교하고 그 자리에서 결정한다'],['JP3','J','아직 정해지지 않은 일정이 있을 때','얼른 확정돼야 마음이 놓인다','미정인 상태도 괜찮고 가능성이 열려 있어 오히려 좋다'],['JP3','P','이미 정한 계획이 있는데 더 좋아 보이는 선택지가 나타났다','바로 갈아탄다, 더 좋은 쪽으로 유연하게','이미 정한 건 웬만하면 지킨다'],['JP4','J','내 책상이나 방의 평소 모습','물건마다 자리가 정해져 있다','어수선해 보여도 나는 어디에 뭐가 있는지 안다'],['JP4','P','기상, 운동, 식사 같은 하루 루틴에 대해','매일 똑같으면 답답하다, 그날그날 다르게','일정한 루틴이 있어야 컨디션이 좋다'],['JP4','J','휴대폰 사진첩과 파일 폴더 상태','폴더나 앨범별로 정리해 둔다','일단 쌓아두고 필요하면 검색한다'],['JP4','P','일정을 관리하는 방식','중요한 것만 기억하고 나머지는 그때그때','캘린더나 다이어리에 꼼꼼히 기록한다']];
+const QX=[['EI1','E','긴 출장이나 시험 기간이 막 끝난 날, 가장 하고 싶은 건','친구들을 불러 모아 끝난 기념으로 신나게 논다','휴대폰을 무음으로 두고 혼자 푹 늘어져 쉰다'],['EI2','I','설명하기 어려운 감정이나 생각이 생겼을 때','글로 써 보거나 혼자 곱씹어야 정체가 보인다','누군가에게 말로 풀어놓아야 정체가 보인다'],['EI3','E','지난 1년 동안 따로 연락을 주고받은 사람을 떠올려 보면','여러 모임에 걸쳐 꽤 많은 사람과 두루 이어져 있다','손에 꼽을 만큼이지만 그 몇 명과는 아주 가깝다'],['EI4','I','내 생일을 축하하는 자리를 직접 고를 수 있다면','가까운 몇 명과 조용한 식당에서 오래 이야기하는 저녁','여러 친구가 모여 음악 틀고 왁자지껄하게 노는 파티'],['EI1','I','저녁 모임이 밤 11시에 끝났고, 몇 명이 2차를 가자고 한다','오늘은 이만하면 충분하다, 집에 가서 혼자 쉬고 싶다','좋다, 아직 에너지가 남아 있어서 따라간다'],['EI2','E','회의에서 아무도 말을 꺼내지 않아 정적이 흐른다','덜 정리됐어도 먼저 생각을 꺼내며 대화의 물꼬를 튼다','생각이 정리될 때까지 조금 더 듣고 기다린다'],['EI3','I','새 동네로 이사 와서 1년쯤 지났을 때 나는','단골 가게 한두 곳과 가까운 이웃 몇 명이면 충분하다','동네 모임이나 커뮤니티에 들어가 아는 얼굴을 넓혀 간다'],['EI4','E','한 달에 한 번 생기는 자유로운 저녁','공연, 페스티벌, 사람 많은 핫플처럼 에너지 넘치는 곳에 간다','조용한 바나 집에서 영화를 보며 차분하게 보낸다'],['SN1','S','중고 거래로 비싼 물건을 사기 전, 판매자를 믿을지 정할 때','거래 후기, 실물 사진, 구매 영수증처럼 확인 가능한 증거','몇 마디 대화에서 오는 ‘이 사람 괜찮다’는 느낌'],['SN2','N','지난 여행 사진을 다시 넘겨볼 때 주로 드는 생각','다음엔 어디로, 어떤 여행을 떠날지 상상이 이어진다','그때의 음식, 냄새, 날씨가 생생하게 다시 떠오른다'],['SN3','S','동료가 업무를 넘겨주며 설명할 때 가장 고마운 것','실제 예시와 처리 순서가 적힌 체크리스트','이 일이 왜 필요하고 전체에서 어떤 역할인지에 대한 설명'],['SN4','N','매년 가는 가족 여행지를 정할 때','이번엔 한 번도 안 가본 곳으로 바꿔 보자고 한다','늘 가던 검증된 곳이 편하고 좋다'],['SN1','N','회의가 끝난 뒤 내 머릿속에 더 오래 남는 것','말 사이에 흐르던 분위기와 각자의 속내','누가 어떤 숫자와 일정을 이야기했는지'],['SN2','S','오랜만에 생긴 휴일 아침, 머릿속을 채우는 건','오늘 뭘 먹고 어디에 갈지 같은 지금의 계획','언젠가 해보고 싶은 일이나 몇 년 뒤의 내 모습'],['SN3','N','책이나 강의를 정리할 때 나는','핵심 개념끼리 어떻게 연결되는지 구조로 묶는다','중요한 사실과 예시를 순서대로 빠짐없이 적는다'],['SN4','S','오래 쓴 휴대폰을 바꿀 때','쓰던 것과 비슷한 익숙한 모델을 고른다','이번엔 안 써본 브랜드나 새로운 기기를 시도해 본다'],['TF1','T','모임에서 새 회장을 뽑는 투표를 한다','맡은 일을 가장 잘 해낼 것 같은 사람에게 투표한다','모두와 잘 지내고 분위기를 살릴 사람에게 투표한다'],['TF2','F','동료의 보고서에서 틀린 숫자를 발견했다. 회의 시작 10분 전이다','당황하지 않게 조용히 따로 불러 조심스럽게 알려준다','시간이 없으니 그 자리에서 바로 짚고 함께 고친다'],['TF3','T','동생이 시험을 망쳤다며 시무룩해 있다','어디서 틀렸는지 같이 보고 다음엔 어떻게 할지 정리해 준다','맛있는 걸 사 주며 기분부터 풀어 준다'],['TF4','F','재택근무 신청을 받는데 자리가 한정되어 있다','아이 돌봄처럼 사정이 급한 사람부터 배려하는 게 공정하다','사정과 상관없이 같은 기준의 순서나 추첨으로 정하는 게 공정하다'],['TF1','F','정해진 예산으로 친구 생일 선물을 고른다','받았을 때 기뻐할 친구의 얼굴이 떠오르는 것','가격 대비 가장 쓸모 있고 오래 쓸 수 있는 것'],['TF2','T','친구가 소개팅에 입고 갈 옷을 보여주는데 솔직히 잘 안 어울린다','안 어울린다고 분명히 말하고 다른 옷을 권한다','기분 상하지 않게 ‘이것도 좋은데 저건 어때?’ 하고 돌려 말한다'],['TF3','F','동료가 마감 직전 실수로 곤란에 빠졌다. 내가 먼저 하는 건','많이 놀랐겠다며 안심시키고 마음부터 진정시킨다','남은 시간 안에 수습할 방법부터 함께 짠다'],['TF4','T','지각하면 벌금을 내기로 한 스터디에서 친한 친구가 사정이 있어 늦었다','정한 규칙이니 친구여도 벌금은 똑같이 받는다','사정이 이해되니 이번엔 넘어가 준다'],['JP1','J','친구 생일 서프라이즈를 함께 준비하게 됐다','장소, 순서, 역할 분담을 미리 꼼꼼하게 짜 둔다','큰 틀만 정하고 당일 분위기에 맞춰 즉석에서 꾸린다'],['JP2','P','각종 서류 제출 마감이 다가온다','마감이 가까워져야 비로소 집중해서 처리한다','안내가 나오면 바로 처리해 두는 편이다'],['JP3','J','주말 약속 장소를 정하는 단톡방에서','후보를 두세 개로 추려 투표를 올리고 빨리 확정한다','여러 의견이 나오게 두고 당일 가까이 정해도 괜찮다'],['JP4','P','퇴근이나 하교 후 저녁 시간은','날마다 그때 하고 싶은 것을 정해서 보낸다','운동, 공부, 휴식처럼 요일별로 하는 일이 정해져 있다'],['JP1','P','집들이 음식을 준비해야 한다','장을 보며 끌리는 재료를 보고 메뉴를 정한다','메뉴와 장보기 목록을 미리 다 정해서 간다'],['JP2','J','다음 달 이사가 잡혔다','몇 주 전부터 짐을 조금씩 싸 둔다','이사 며칠 전에 몰아서 한 번에 싼다'],['JP3','P','주말에 볼 영화를 고르는 중이다','상영 직전까지 이것저것 후보를 열어 두고 고른다','미리 하나를 정해 예매까지 끝내 둔다'],['JP4','J','냉장고나 옷장 안의 상태는','어디에 무엇을 둘지 정해 둔 규칙대로 정리돼 있다','그때그때 편하게 넣고, 필요할 때 찾아 쓴다']];
+const AX={EI:{n:'에너지의 방향',a:'E',b:'I',an:'외향',bn:'내향'},SN:{n:'정보를 받아들이는 방식',a:'S',b:'N',an:'감각',bn:'직관'},TF:{n:'판단의 기준',a:'T',b:'F',an:'사고',bn:'감정'},JP:{n:'삶을 다루는 방식',a:'J',b:'P',an:'계획',bn:'유연'}};
+const FT={EI1:['에너지 충전','사람들 속에서 에너지가 채워져요','혼자만의 시간으로 에너지를 채워요'],EI2:['생각 처리','말하면서 생각이 정리돼요','속으로 정리한 뒤에 말해요'],EI3:['관계의 모양','넓고 다양한 관계를 즐겨요','좁고 깊은 관계를 선호해요'],EI4:['자극 선호','활기차고 북적이는 자극이 좋아요','차분하고 조용한 환경이 편해요'],SN1:['정보 신뢰','직접 확인한 사실과 디테일을 믿어요','패턴과 직감, 숨은 의미를 읽어요'],SN2:['관심의 시간축','지금 여기, 현실에 발을 딛고 있어요','‘만약에’와 미래의 가능성에 끌려요'],SN3:['이해 방식','구체적인 예시와 단계로 이해해요','큰 그림과 원리로 이해해요'],SN4:['새로움','검증된 방식의 안정감이 좋아요','새로운 방식과 변화를 즐겨요'],TF1:['결정 기준','논리와 합리성으로 결정해요','사람과 의미를 기준으로 결정해요'],TF2:['피드백 방식','솔직하고 명확한 전달을 중시해요','상대가 받아들일 수 있는 전달을 중시해요'],TF3:['돕는 방식','문제를 파악하고 해결하며 도와요','마음을 먼저 알아주며 도와요'],TF4:['공정함의 정의','모두에게 같은 기준이 공정해요','각자의 사정을 헤아리는 게 공정해요'],JP1:['계획','미리 계획해야 마음이 편해요','흐름에 맡기는 게 자연스러워요'],JP2:['일 처리 리듬','미리미리, 순서대로 끝내요','마감의 압박에서 집중력이 살아나요'],JP3:['결정 스타일','빨리 결정하고 마무리하는 게 좋아요','가능성을 열어두는 게 좋아요'],JP4:['생활 구조','정돈된 환경과 루틴이 편해요','유연하고 자유로운 생활이 편해요']};
+const PAIRS=[[4,7],[8,11],[21,23],[43,44],[49,51],[52,56],[61,64]];
+const TY={ISTJ:['북극성','Polaris','변하지 않는 기준점','맡은 일은 끝까지, 약속한 건 반드시. 북극성처럼 늘 같은 자리에서 방향을 알려주는 사람이에요. 화려한 말보다 쌓아온 기록으로 신뢰를 얻고, 사실과 경험에 근거해 차분하게 판단해요. 혼란스러운 순간에 사람들은 자연스럽게 당신을 찾아요.',['책임감과 신뢰성','꼼꼼한 사실 확인','체계적인 실행력','흔들리지 않는 침착함'],['검증되지 않은 새로운 방식에 지나치게 신중할 수 있어요','마음을 행동으로만 표현해서 오해를 사기도 해요','원칙이 사람의 사정보다 앞설 때가 있어요'],'예측할 수 없는 변화가 몰아치면 더 단단히 규칙을 붙잡고, 모든 걸 혼자 떠안으려 해요.','말보다 꾸준함으로 사랑을 표현해요. 기념일을 잊지 않고 약속 시간을 지키는 것이 당신의 고백이에요.','역할과 기준이 분명한 곳에서 빛나요. 품질 관리, 재무, 운영, 법률·행정처럼 정확성이 생명인 일과 잘 맞아요.','가끔은 ‘원래 이렇게 해’ 대신 ‘다르게 하면 어떨까?’를 실험해 보세요. 안정감에 유연함이 더해지면 무적이에요.'],ISFJ:['달','The Moon','조용히 곁을 비추는 수호자','스스로를 내세우기보다 주변을 은은하게 비추는 사람이에요. 누가 무엇을 좋아하는지, 어제 기분이 어땠는지 조용히 기억해 두고 필요한 순간에 손을 내밀어요. 성실하고 따뜻해서, 당신이 있는 곳은 늘 안정적으로 돌아가요.',['세심한 배려와 기억력','묵묵한 성실함','실질적인 도움','안정감을 주는 존재감'],['부탁을 거절하지 못해 혼자 지치기 쉬워요','내 필요를 자꾸 뒤로 미뤄요','갈등을 피하려다 서운함이 쌓이기도 해요'],'도움이 당연하게 여겨진다고 느낄 때 조용히 지치고, 서운함을 속으로 삭여요.','작은 디테일로 사랑을 증명해요. 상대의 취향을 기억하고 챙기는 것이 당신의 언어예요.','사람을 실질적으로 돕는 일에서 보람을 느껴요. 간호·의료, 교육, 고객 지원, 인사·행정과 잘 맞아요.','‘아니요’도 배려의 한 형태예요. 당신을 지키는 경계가 있어야 오래 비출 수 있어요.'],INFJ:['성운','Nebula','보이지 않는 곳에서 별을 빚는 사람','겉으로는 고요하지만 안에서는 끊임없이 별이 태어나는 성운 같은 사람이에요. 사람과 상황의 숨은 흐름을 읽어내고, 그것이 어떤 의미인지 깊이 생각해요. 소수와 깊이 연결되기를 원하고, 세상이 조금 더 나아지는 방향에 마음이 움직여요.',['깊은 통찰력','속마음을 읽는 공감','의미를 향한 집념','조용하지만 강한 신념'],['기대가 높아 스스로와 타인에게 엄격해질 수 있어요','속마음을 잘 드러내지 않아 오해받기도 해요','한계에 다다르면 갑자기 관계의 문을 닫기도 해요'],'감정을 너무 많이 흡수하면 혼자 동굴로 들어가 모든 연락을 끊고 싶어져요.','깊이 없는 관계엔 금방 지쳐요. 내면을 나눌 수 있는 한 사람이 열 명의 지인보다 소중해요.','의미 있는 목표를 위해 사람을 이해하는 일이 잘 맞아요. 상담, 글쓰기, 교육, 기획, 사회 혁신 분야에서 빛나요.','완벽한 때를 기다리지 말고 생각을 조금 일찍 꺼내 보세요. 당신의 통찰은 나눌수록 커져요.'],INTJ:['궤도 설계자','Orbit Architect','먼 미래의 궤적을 계산하는 전략가','몇 수 앞을 내다보며 궤도를 계산하는 전략가예요. 복잡한 문제 속에서 구조를 찾아내고, 장기 목표를 세워 효율적으로 밀고 나가요. 남들이 ‘원래 그래’라고 할 때 더 나은 방법을 설계하는 사람이에요.',['장기적 비전과 전략','독립적인 사고','복잡한 문제의 구조화','목표를 향한 추진력'],['논리가 맞으면 감정은 부차적이라 여겨 차갑게 보일 수 있어요','남의 속도를 답답해할 때가 있어요','혼자 다 계획해 버려 협업이 어려워지기도 해요'],'통제할 수 없는 비효율에 둘러싸이면 냉소적이 되고, 평소와 달리 사소한 감각적 즐거움에 과하게 빠지기도 해요.','말보다 신뢰와 성장으로 관계를 쌓아요. 함께 더 나은 미래를 설계할 파트너를 원해요.','자율성과 지적 도전이 있는 곳에서 몰입해요. 전략 기획, 연구, 엔지니어링, 데이터·시스템 설계와 잘 맞아요.','계획에 ‘사람의 마음’이라는 변수를 넣어 보세요. 그게 계산의 정확도를 오히려 높여 줘요.'],ISTP:['탐사 로버','Rover','직접 만져보고 해결하는 현장 탐사가','설명서보다 직접 만져보며 원리를 파악하는 현장 탐사가예요. 위기에서 오히려 침착해지고, 필요한 만큼만 말하며 효율적으로 문제를 해결해요. 자유롭게 움직일 공간이 있을 때 실력이 가장 잘 나와요.',['위기 대처 능력','손으로 익히는 실전 감각','군더더기 없는 효율','독립성과 적응력'],['감정 표현이 적어 무심해 보일 수 있어요','긴 계획이나 반복 업무에 쉽게 흥미를 잃어요','속박을 느끼면 말없이 거리를 두기도 해요'],'감정적인 압박이 계속되면 갑자기 터지거나 완전히 혼자가 되려 해요.','함께 무언가를 하는 시간으로 가까워져요. 말 대신 고장 난 걸 고쳐주는 게 당신식 애정이에요.','직접 다루고 고치고 만드는 일이 잘 맞아요. 엔지니어링, 정비, 개발, 응급·보안, 스포츠 분야에서 빛나요.','느낀 걸 한 문장이라도 말로 꺼내 보세요. 사람들은 당신의 생각을 생각보다 궁금해해요.'],ISFP:['오로라','Aurora','조용히 피어나는 감각의 예술가','조용히, 그러나 누구보다 선명한 색으로 피어나는 사람이에요. 지금 이 순간의 아름다움을 예민하게 느끼고, 자기만의 취향과 가치를 소중히 지켜요. 다정하지만 강요하지 않고, 각자의 모습을 있는 그대로 존중해요.',['뛰어난 미적 감각','있는 그대로를 받아들이는 다정함','현재를 즐기는 능력','진정성 있는 표현'],['갈등을 피하려다 속마음을 숨기기 쉬워요','장기 계획 세우기를 미루곤 해요','비판을 개인적인 상처로 받아들일 때가 있어요'],'자기 가치가 무시당한다고 느끼면 조용히 마음을 닫고 멀어져요.','함께한 순간과 작은 선물로 마음을 전해요. 자유를 존중해 주는 사람에게 깊이 열려요.','감각과 진정성을 살리는 일이 잘 맞아요. 디자인, 예술, 요리, 사진, 자연·동물, 돌봄 분야에서 빛나요.','당신의 취향은 그 자체로 경쟁력이에요. 조금 더 큰 목소리로 세상에 보여줘도 돼요.'],INFP:['은하수','Milky Way','자기만의 의미를 품은 몽상가','겉으론 고요하지만 안에 수많은 이야기와 이상을 품은 은하수 같은 사람이에요. 자신에게 진짜 의미 있는 것을 따르고, 타인의 아픔에 깊이 공감해요. 세상이 정한 정답보다 내 마음이 납득하는 답을 찾아요.',['깊은 공감 능력','풍부한 상상력과 표현력','흔들리지 않는 가치관','타인의 가능성을 믿는 마음'],['이상과 현실의 차이에 쉽게 낙담할 수 있어요','현실적인 일 처리를 미루곤 해요','생각이 많아 행동이 늦어지기도 해요'],'자기 가치가 침해당하면 평소의 온화함과 달리 단호하고 날카로워져요.','영혼의 대화를 나눌 수 있는 관계를 꿈꿔요. 진심을 알아봐 주는 사람에게 모든 걸 내어줘요.','의미와 자율이 있는 일에서 몰입해요. 글쓰기, 콘텐츠, 상담, 교육, 예술, 사회적 가치를 다루는 일과 잘 맞아요.','완벽한 버전이 아니라 첫 번째 버전을 세상에 내놓아 보세요. 당신의 이야기를 기다리는 사람이 있어요.'],INTP:['웜홀','Wormhole','생각과 생각 사이 지름길을 찾는 탐구자','‘왜?’라는 질문을 멈추지 않는 탐구자예요. 세상의 원리를 이해할 때 가장 큰 기쁨을 느끼고, 생각과 생각 사이의 지름길을 찾아내요. 논리적으로 정확한 것을 사랑하고, 남들이 지나친 모순을 정확히 짚어내요.',['날카로운 분석력','독창적인 아이디어','끝없는 지적 호기심','편견 없는 객관성'],['아이디어를 끝까지 실행하는 데 약할 수 있어요','정확성을 따지다 상대의 감정을 놓치기도 해요','일상적인 일을 자꾸 뒤로 미뤄요'],'감정적인 상황에 몰리면 평소답지 않게 예민해지고, 생각 속으로 숨어요.','끝없는 대화를 즐길 수 있는 사람에게 끌려요. 관심 있는 주제를 함께 파고드는 시간이 애정 표현이에요.','복잡한 문제를 자율적으로 파고드는 일이 잘 맞아요. 연구, 개발, 데이터 분석, 과학, 시스템 설계 분야에서 빛나요.','80% 완성된 생각도 꺼낼 가치가 있어요. 세상의 피드백이 당신의 이론을 완성시켜 줘요.'],ESTP:['유성','Meteor','지금 이 순간을 가장 밝게 태우는 행동가','생각보다 몸이 먼저 움직이는 행동가예요. 현장의 분위기를 빠르게 읽어 기회를 잡고, 위기에서 순발력을 발휘해요. 유쾌하고 대담해서, 당신이 있으면 일이 재밌게 그리고 빠르게 굴러가요.',['빠른 상황 판단','대담한 실행력','유머와 친화력','위기 속 순발력'],['결과를 충분히 생각하기 전에 움직일 때가 있어요','길고 반복적인 프로젝트에 흥미를 잃기 쉬워요','직설적인 말이 가끔 상대를 놀라게 해요'],'지루함과 통제에 갇히면 충동적인 선택으로 탈출하려 해요.','함께 새로운 걸 경험하며 가까워져요. 긴 대화보다 같이 떠나는 즉흥 여행이 최고의 데이트예요.','속도감 있고 결과가 바로 보이는 일이 잘 맞아요. 영업, 창업, 마케팅, 스포츠, 현장 지휘, 응급 분야에서 빛나요.','움직이기 전에 딱 10초만 다음 수를 생각해 보세요. 실행력에 방향이 더해지면 멈출 수 없어요.'],ESFP:['초신성','Supernova','어디서든 빛나는 순간을 만드는 사람','사람과 함께하는 즐거움을 사랑하고, 주변의 기분을 단번에 끌어올리는 사람이에요. 오늘을 충실하게 사는 법을 알고, 그 에너지를 아낌없이 나눠요. 당신이 있는 자리는 자연스럽게 무대가 돼요.',['분위기를 살리는 에너지','현재를 즐기는 능력','따뜻한 친화력','실용적인 센스'],['장기 계획을 미루기 쉬워요','무거운 주제나 갈등을 피하고 싶어 해요','즉흥적인 소비나 선택을 하기도 해요'],'외로움과 비판이 겹치면 평소의 밝음이 꺼지고 미래에 대한 걱정에 빠져요.','함께 웃고 경험하는 시간이 사랑이에요. 상대가 즐거워하는 걸 보는 게 가장 행복해요.','사람과 에너지를 주고받는 일이 잘 맞아요. 서비스, 이벤트, 공연, 영업, 교육 분야에서 빛나요.','즐거움의 일부를 미래의 나에게 저축해 보세요. 내일의 당신도 빛날 권리가 있어요.'],ENFP:['혜성','Comet','가는 곳마다 영감의 꼬리를 남기는 사람','새로운 가능성을 발견하면 눈이 반짝이는 사람이에요. 사람들의 잠재력을 누구보다 먼저 알아보고, 따뜻한 열정으로 주변을 설레게 만들어요. 당신이 지나간 자리엔 아이디어와 웃음이 꼬리처럼 남아요.',['넘치는 아이디어와 열정','사람의 가능성을 보는 눈','뛰어난 소통력','변화에 대한 유연함'],['시작은 많고 마무리는 어려울 때가 있어요','관심이 여러 곳으로 흩어지기 쉬워요','반복적인 일에 금방 지쳐요'],'기대가 무너지면 평소와 달리 사소한 디테일에 집착하거나 스스로를 몰아세워요.','깊고 진솔한 대화와 함께 꿈꾸는 시간을 사랑해요. 상대의 성장을 진심으로 응원해요.','아이디어와 사람이 만나는 일에서 빛나요. 기획, 마케팅, 콘텐츠, 교육, 상담, 창업과 잘 맞아요.','열 개의 시작보다 하나의 완성이 더 멀리 날아가요. 마무리를 도와줄 루틴이나 동료를 곁에 두세요.'],ENTP:['퀘이사','Quasar','아이디어를 쉬지 않고 뿜어내는 발명가','우주에서 가장 밝게 빛나는 퀘이사처럼 아이디어를 쉬지 않고 쏟아내요. 기존의 틀을 의심하고 뒤집어 보는 걸 즐기며, 토론을 통해 생각을 더 날카롭게 다듬어요. 남들이 당연하게 여기는 전제를 건드려 새로운 길을 여는 사람이에요.',['창의적인 문제 해결','빠른 두뇌 회전','토론과 설득력','변화를 기회로 보는 시각'],['재미로 한 반박이 상대에겐 공격처럼 들릴 수 있어요','아이디어 단계에서 흥미가 끝나기도 해요','규칙과 반복 업무를 견디기 어려워해요'],'자극이 없거나 아이디어가 무시당하면 산만해지고 사소한 일에 예민해져요.','대화가 통하는 사람에게 끌려요. 함께 웃고 논쟁하며 성장하는 관계가 이상적이에요.','새로운 걸 만들고 판을 바꾸는 일이 잘 맞아요. 창업, 전략 컨설팅, 기획, 연구, 마케팅, 법률 분야에서 빛나요.','아이디어 하나를 끝까지 데려가 보세요. 완성된 하나가 당신의 재능을 증명해 줄 거예요.'],ESTJ:['관제센터','Mission Control','모든 것이 제대로 돌아가게 만드는 관리자','모든 것이 제대로, 제때 돌아가게 만드는 사람이에요. 명확한 기준과 계획으로 사람과 자원을 조직하고 책임감 있게 결과를 만들어내요. 혼란스러운 상황에서 질서를 세우는 데 탁월해요.',['조직력과 리더십','결단력 있는 실행','분명한 기준과 책임감','현실적인 판단력'],['내 방식이 맞다는 확신이 강해 보일 수 있어요','효율을 앞세우다 감정을 놓치기도 해요','예상 밖의 변화에 답답함을 느껴요'],'통제가 무너지면 더 강하게 지시하게 되고, 쌓인 감정이 한꺼번에 터지기도 해요.','약속을 지키고 실질적으로 챙기는 것으로 사랑을 보여줘요. 믿음직한 버팀목 같은 연인이에요.','체계를 세우고 이끄는 자리에서 빛나요. 경영·관리, 운영, 금융, 공공 행정, 프로젝트 관리와 잘 맞아요.','결정 전에 ‘다른 사람은 이걸 어떻게 느낄까?’를 한 번만 물어보세요. 리더십이 더 단단해져요.'],ESFJ:['우주정거장','Space Station','모두가 머물고 싶은 따뜻한 거점','사람들 사이의 분위기를 섬세하게 살피고, 누구도 소외되지 않도록 챙기는 사람이에요. 공동체를 아끼고, 함께 잘 지내는 것을 가장 중요한 가치로 여겨요. 지친 사람들이 쉬어 가는 정거장 같은 존재예요.',['뛰어난 배려와 사교성','공동체를 묶는 힘','책임감 있는 실천','타인의 필요를 빠르게 알아차림'],['다른 사람의 평가에 크게 흔들릴 수 있어요','갈등 상황을 견디기 어려워해요','내 필요보다 남의 기대를 먼저 챙겨요'],'인정받지 못하거나 관계가 틀어지면 크게 상처받고 자신을 탓해요.','챙겨주고 함께하는 일상이 사랑이에요. 기념일과 작은 이벤트를 소중히 여기는 다정한 연인이에요.','사람을 돌보고 연결하는 일에서 빛나요. 교육, 의료, 인사, 서비스, 커뮤니티 운영, 행사 기획과 잘 맞아요.','모두를 만족시키지 못해도 괜찮아요. 당신도 챙김받아야 할 ‘모두’ 중 한 명이에요.'],ENFJ:['태양','The Sun','주변을 성장시키는 중심 항성','주변 행성들이 자연스럽게 공전하게 만드는 중심 항성 같은 사람이에요. 사람들의 가능성을 믿고, 그들이 성장하도록 이끄는 데서 큰 보람을 느껴요. 따뜻한 카리스마로 공동의 비전을 만들어내요.',['사람을 이끄는 카리스마','성장을 돕는 코칭 능력','뛰어난 공감과 소통','비전을 공유하는 힘'],['남의 문제를 내 문제처럼 떠안기 쉬워요','인정받고 싶은 마음에 무리하기도 해요','좋은 의도가 간섭으로 느껴질 때가 있어요'],'모두를 챙기다 지치면 갑자기 냉정해지거나 스스로를 비난해요.','상대의 성장을 진심으로 응원하는 연인이에요. 깊은 대화와 함께 그리는 미래를 중요하게 여겨요.','사람을 이끌고 성장시키는 일에서 빛나요. 교육, 코칭, 리더십, HR, 커뮤니케이션, 사회 공헌 분야와 잘 맞아요.','태양도 밤이 있어야 별이 보여요. 남을 비추는 만큼 스스로 쉬는 시간도 계획에 넣어 주세요.'],ENTJ:['함대 사령관','Fleet Commander','목표를 향해 함대를 이끄는 지휘관','목표를 정하면 함대를 이끌고 거침없이 나아가는 지휘관이에요. 큰 그림을 그리고, 그것을 실행 가능한 계획으로 바꿔 사람들을 움직여요. 도전적인 목표 앞에서 오히려 에너지가 솟아요.',['강력한 리더십','전략과 실행의 연결','결단력과 자신감','높은 기준과 성취욕'],['속도를 중시하다 사람의 감정을 지나칠 수 있어요','직설적인 말투가 위압적으로 느껴지기도 해요','쉬는 법을 잘 몰라요'],'목표가 흔들리면 더 강하게 밀어붙이고, 쌓인 감정이 예상치 못한 순간에 터져요.','함께 성장하는 파트너십을 원해요. 상대의 꿈을 현실로 만드는 계획을 같이 세워주는 타입이에요.','판을 짜고 이끄는 자리에서 빛나요. 경영, 창업, 전략, 컨설팅, 법률, 투자 분야와 잘 맞아요.','목표만큼 과정 속의 사람들을 봐 주세요. 함대는 신뢰로 움직일 때 가장 멀리 가요.']};
+// 기준값은 sim.js(가상 응답자 50명 × 20회 = 1,000회) 결과로 보정함. 실제 응답 데이터가 모이면 다시 보정할 것
+const CFG={band:57,lean:65,clear:76,flagMax:3,incMax:2.3,incHi:1.6,neuMax:56,neuNote:35,runMax:15,minSec:240,fw:0,xtrig:57,xn1:4,xseq:1,RTX:[[51,55],[53,65],[55,70],[57,75],[61,80],[63,85],[100,90]],RT:[[51,55],[53,60],[55,65],[57,75],[59,80],[63,85],[65,90],[72,95],[100,98]]};
+const AXK=['EI','SN','TF','JP'],LISTS={EI:[],SN:[],TF:[],JP:[]},FAC={};
+Q.forEach((q,i)=>{LISTS[q[0].slice(0,2)].push(i);(FAC[q[0]]=FAC[q[0]]||[]).push(i)});
+const LX={EI:[],SN:[],TF:[],JP:[]},FACX={};QX.forEach((q,j)=>{LX[q[0].slice(0,2)].push(70+j);(FACX[q[0]]=FACX[q[0]]||[]).push(70+j)});
+function item(i){return i<70?Q[i]:QX[i-70]}
+const has=(an,i)=>an[i]!==undefined&&an[i]!==null;
+const ORDER=[];for(let k=0;k<19;k++)AXK.forEach(a=>{if(k<LISTS[a].length)ORDER.push(LISTS[a][k])});
+function scA(an,i){const s=3-an[i],q=item(i);return q[1]===AX[q[0].slice(0,2)].a?s:-s}
+function clar(d){return d<=CFG.band?'경계형':d<=CFG.lean?'약간 기울어짐':d<=CFG.clear?'뚜렷함':'매우 뚜렷함'}
+function rt(d,x){for(const [m,p] of (x?CFG.RTX:CFG.RT))if(d<=m)return p;return 98}
+function score(an){const R={};let code='';
+ AXK.forEach(a=>{const xs=LX[a].filter(i=>has(an,i)),ids=LISTS[a].concat(xs),x=AX[a],ss=ids.map(i=>scA(an,i)),fac={},fm=[];
+  [1,2,3,4].forEach(f=>{const fi=FAC[a+f].concat(FACX[a+f].filter(i=>has(an,i))),m=fi.reduce((s,i)=>s+scA(an,i),0)/fi.length;fm.push(m);fac[a+f]=Math.round(50+m/3*50)});
+  let raw=CFG.fw?fm.reduce((s,v)=>s+v,0)/4:ss.reduce((s,v)=>s+v,0)/ids.length;
+  if(Math.abs(raw)<1e-9)raw=0;
+  let pa=Math.round(50+raw/3*50);if(raw>0&&pa<51)pa=51;if(raw<0&&pa>49)pa=49;
+  const np=ss.filter(v=>v>0).length,nn=ss.filter(v=>v<0).length;
+  const L=raw>0?x.a:raw<0?x.b:(np>=nn?x.a:x.b),isA=L===x.a;
+  const al=ids.map(i=>[i,isA?scA(an,i):-scA(an,i)]);
+  R[a]={pa,L,fac,raw,n:ids.length,x:xs.length,ev:al.filter(v=>v[1]>=2).sort((u,w)=>w[1]-u[1]).slice(0,2),opp:al.filter(v=>v[1]<0).length,d:Math.max(pa,100-pa)};code+=L});
+ return {code,R}}
+function quality(an,sec){
+ const v=PAIRS.map(([x,y])=>[scA(an,x),scA(an,y)]);
+ const flag=v.filter(([p,q])=>p*q<0&&Math.abs(p-q)>=4).length;
+ let sd=0,np=0;Object.keys(FAC).forEach(k=>{const fi=FAC[k];for(let i=0;i<fi.length;i++)for(let j=i+1;j<fi.length;j++){sd+=Math.abs(scA(an,fi[i])-scA(an,fi[j]));np++}});
+ const inc=sd/np,cons=inc<=CFG.incHi?'높음':inc<=CFG.incMax?'보통':'낮음';
+ const neu=Q.filter((_,i)=>an[i]===3).length;
+ let run=1,best=1;for(let k=1;k<ORDER.length;k++){if(an[ORDER[k]]===an[ORDER[k-1]]){run++;if(run>best)best=run}else run=1}
+ const warn=[];
+ if(flag>CFG.flagMax||inc>CFG.incMax)warn.push('mix');
+ if(neu>CFG.neuMax)warn.push('neu');
+ if(best>CFG.runMax)warn.push('run');
+ if(typeof sec==='number'&&sec<CFG.minSec)warn.push('fast');
+ return {flag,inc,cons,neu,best,sec,warn,ok:!warn.length,note:neu>CFG.neuNote&&neu<=CFG.neuMax}}
+// 적응형 추가 문항: 70문항 기준 경계형 축만 1단계(측면마다 1문항, A방향 2:2)를 묻고, 단계형이면 1단계를 합쳐도 경계형인 축에만 2단계를 묻는다
+function xIL(ls){const o=[];for(let k=0;k<8;k++)ls.forEach(l=>{if(k<l.length)o.push(l[k])});return o}
+function xPlan(an){const b={};for(let i=0;i<70;i++)if(has(an,i))b[i]=an[i];
+ const r0=score(b),ax1=AXK.filter(a=>r0.R[a].d<=CFG.xtrig),l1=xIL(ax1.map(a=>LX[a].slice(0,CFG.xn1)));
+ if(!CFG.xseq||!l1.every(i=>has(an,i)))return {ax1,ax2:[],list:l1,n1:l1.length};
+ l1.forEach(i=>b[i]=an[i]);const r1=score(b),ax2=ax1.filter(a=>r1.R[a].d<=CFG.xtrig);
+ return {ax1,ax2,list:l1.concat(xIL(ax2.map(a=>LX[a].slice(CFG.xn1)))),n1:l1.length}}
+function xNext(an){return xPlan(an).list.filter(i=>!has(an,i))}
+function xClean(an){const p=xPlan(an).list;Object.keys(an).forEach(k=>{if(+k>=70&&!p.includes(+k))delete an[k]})}
+/*ENGINE_END*/
+const STOPS=['수성','금성','지구','화성','목성','토성','천왕성','해왕성','카이퍼 벨트','태양계 밖'];
+const BRK=[{t:'f',h:'금성의 하루는 1년보다 길어요',b:'금성이 한 바퀴 자전하는 데는 지구 시간으로 약 243일, 태양을 한 바퀴 도는 데는 약 225일이 걸려요.'},{t:'p',h:'우주선에 하나만 가져갈 수 있다면',o:[['라면','무중력에서는 국물이 공처럼 떠다녀요. 그릇보다 빨대를 챙기세요.'],['플레이리스트','우주는 진공이라 소리가 전달되지 않아요. 이어폰은 필수예요.'],['내 베개','현명한 선택이에요. 우주비행사도 침낭을 벽에 고정하고 잡니다.']]},{t:'f',h:'토성은 물에 뜰 수도 있어요',b:'토성의 평균 밀도는 물보다 낮아요. 토성이 들어갈 만큼 거대한 욕조가 있다면 떠오를 거예요.'},{t:'p',h:'외계인을 처음 만났을 때 첫마디는',o:[['안녕하세요','예의 바른 지구 대표. 은하 외교관 후보로 등록되었습니다.'],['MBTI 뭐예요?','그쪽은 16개가 아니라 1,600개쯤 있을지도 몰라요.'],['와이파이 돼요?','참고로 화성까지는 신호가 가는 데만 수 분이 걸려요.']]},{t:'f',h:'지금 보는 햇빛은 8분 전의 태양이에요',b:'빛이 태양에서 지구까지 오는 데 약 8분 20초가 걸려요. 우리는 언제나 조금 과거의 태양을 봅니다.'},{t:'p',h:'갑자기 무중력이 된다면 제일 먼저',o:[['공중제비','즐기는 타입. 우주비행사들도 첫날엔 다들 돈다고 해요.'],['물방울 먹기','무중력에서 물은 동그란 구슬이 돼요.'],['잡을 곳 찾기','우주정거장 벽에 손잡이가 많은 데는 이유가 있어요.']]},{t:'f',h:'달은 매년 조금씩 멀어지고 있어요',b:'달은 해마다 약 3.8cm씩 지구에서 멀어져요. 손톱이 자라는 속도와 비슷해요.'},{t:'p',h:'지금 기분과 가장 닮은 천체는',o:[['유성','결과가 궁금하군요. 두 궤도만 더 가면 돼요.'],['달','좋은 페이스예요. 그대로 가요.'],['블랙홀','물 한 잔 마시고 와도 괜찮아요. 답은 그대로 남아 있어요.']]},{t:'f',h:'당신은 말 그대로 별의 조각이에요',b:'우리 몸을 이루는 탄소, 산소, 철은 아주 오래전 별 속에서 만들어졌어요. 이제 마지막 7문항이에요.'}];
+const CMP=[['질문이 모호해요','‘나는 사교적이다’처럼 사람마다 해석이 다른 형용사형 문항','모든 문항을 구체적인 일상 장면으로. 누구나 같은 의미로 읽어요'],['51%와 99%가 같은 글자예요','경계선 근처도 무조건 한 글자로 잘라서 재검사 때 뒤집혀요',`축마다 퍼센트와 선명도를 보여주고, ${100-CFG.band}~${CFG.band}% 경계형 축은 추가 문항으로 한 번 더 재요`],['이상적인 나를 고르게 돼요','한쪽 답이 더 좋아 보여서 바라는 모습을 선택하게 돼요','두 선택지를 똑같이 괜찮은 답으로 써서 정답이 없어요'],['한 가지 면만 봐요','사람 만나는 걸 좋아하는지만으로 외향·내향을 판정해요','축마다 4개, 총 16개 측면을 따로 재요'],['근거가 없어요','네 글자와 설명문만 주고 이유는 알려주지 않아요','결정적 답변을 근거로 보여주고, 응답 일관성까지 점검해요']];
+const SZ=[42,34,27,18,27,34,42],COL=['#8B7CFF','#8B7CFF','#8B7CFF','rgba(255,255,255,.35)','#3DD6E0','#3DD6E0','#3DD6E0'];
+const LBL=['A에 매우 가깝다','A에 꽤 가깝다','A에 약간 가깝다','반반','B에 약간 가깝다','B에 꽤 가깝다','B에 매우 가깝다'];
+const WM={mix:'같은 측면을 다른 장면으로 물은 문항들에서 서로 엇갈린 답이 많았어요.',neu:'반반 응답이 많아 성향이 충분히 드러나지 않았어요.',run:'같은 칸을 연달아 고른 구간이 길었어요.',fast:'문항당 응답 시간이 매우 짧았어요.'};
+const app=document.getElementById('app'),SAVE='jiniverse_v1',LAST='jiniverse_last';
+let ans={},pos=0,act=0,qT=0,mode='home',isSample=false,locked=false,seen={},lastRes=null,advT=0,cardUrl='',xpos=0,xkey=-1,xskip=false;
+const $=id=>document.getElementById(id);
+const FOOT=`<p class='foot'>JINIVERSE v1.1 · 잠정 규준 · 녹녹이 자체 설계한 검사로 The Myers-Briggs Company의 공식 MBTI®와 무관해요. 자기이해와 재미를 위한 도구이니 진단이나 채용 판단에는 쓰지 마세요.</p>`;
+function toTop(){window.scrollTo({top:0,behavior:'smooth'})}
+function paint(h){clearTimeout(advT);app.innerHTML=`<div class='fade'>${h}</div>`;toTop()}
+function backBtn(id,label){return `<button class='back' id='${id}'>← ${label}</button>`}
+function sGet(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}
+function sSet(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function sDel(k){try{localStorage.removeItem(k)}catch(e){}}
+function save(){sSet(SAVE,{ans,act:isNaN(act)?null:act,seen,xskip})}
+function full(a){return !!a&&Q.every((_,i)=>Number.isInteger(a[i])&&a[i]>=0&&a[i]<=6)}
+
+function goHome(){mode='home';const s=sGet(SAVE),n=s&&s.ans?Object.keys(s.ans).filter(k=>+k<70).length:0,xp=n===70&&!s.xskip&&xNext(s.ans).length>0,last=sGet(LAST),lc=last&&full(last.ans)?score(last.ans).code:'';
+ paint(`<span class='pill glass'><i></i>녹녹 · JINIVERSE v1.1</span>
+ <h1>나는 어떤 궤도를<br>도는 사람일까?</h1>
+ <p class='lead'>해석이 갈리는 형용사 대신 70개의 일상 장면으로, 당신이 도는 16개의 궤도 중 하나를 찾아드려요. 결과에는 그 이유가 되는 당신의 답이 함께 실려요.</p>
+ <div class='chips'><span class='chip glass'>70문항 + 경계 축 추가</span><span class='chip glass'>약 12분</span><span class='chip glass'>4축 × 4측면</span><span class='chip glass'>16유형</span></div>
+ ${(n>0&&n<70)||xp?`<button class='cta' id='bResume'>이어서 하기 · ${n<70?n+' / 70':'추가 문항'}</button><button class='sub glass' id='bStart'>처음부터 다시 하기</button>`:`<button class='cta' id='bStart'>70문항으로 내 궤도 찾기</button>`}
+ ${lc?`<button class='sub glass' id='bLast'>지난 결과 다시 보기 · ${lc}</button>`:''}
+ <button class='sub glass' id='bKnow'>내 유형 알아요 · 바로 보기</button>
+ <button class='sub glass' id='bSample'>샘플 결과 먼저 보기</button>
+ <div class='glass pad' style='margin-top:40px'><p style='font-size:16px;font-weight:600;margin-bottom:16px'>어떻게 만든 검사인가요?</p>
+ <div class='li'><b>01</b><span>네 축을 성격 5요인 모델(Big Five)의 외향성·개방성·친화성·성실성에 연결해, 문항 70개를 모두 새로 썼어요.</span></div>
+ <div class='li'><b>02</b><span>축마다 4개, 총 16개 하위 측면을 측정하고, 흔들리기 쉬운 T/F와 J/P 축에 문항을 더 배정했어요.</span></div>
+ <div class='li'><b>03</b><span>${100-CFG.band}~${CFG.band}%가 나온 경계형 축은 그 축만 골라 새 장면의 추가 문항으로 다시 재요. 그래도 경계형이면 숨기지 않고 알려줘요.</span></div>
+ <div class='li'><b>04</b><span>가상 응답자 50명의 응답 1,000회를 시뮬레이션해 채점 방식, 경계 구간, 응답 품질 기준을 보정했어요.</span></div></div>
+ ${FOOT}`);
+ $('bStart').onclick=showIntent;
+ if($('bResume'))$('bResume').onclick=()=>{ans=s.ans;seen=s.seen||{};act=typeof s.act==='number'?s.act:NaN;isSample=false;xskip=false;if(n===70){goX();return}let p=0;while(p<69&&ans[ORDER[p]]!==undefined)p++;if(p>0&&p%7===0&&!seen[p-1]){pos=p-1;seen[p-1]=1;save();showBreak(Math.floor(pos/7))}else showQ(p)};
+ if($('bLast'))$('bLast').onclick=()=>{ans=last.ans;showResult('last')};
+ $('bKnow').onclick=showGallery;
+ $('bSample').onclick=showSample}
+
+function showIntent(){mode='intent';
+ let h=backBtn('bk','처음으로')+`<p class='eb' style='margin-top:28px'>시작하기 전에</p><h2 style='margin-top:10px;font-size:26px'>이 검사를 만든 이유</h2>
+ <div class='glass pad' style='margin-top:18px;font-size:16px;line-height:1.9'>
+ <p style='margin-bottom:14px'>‘할 때마다 결과가 달라요.’ 성격 유형 검사를 해본 사람들에게서 가장 많이 듣는 말입니다. 저는 문제가 사람이 아니라 질문에 있다고 생각했습니다. ‘나는 사교적이다’라는 문장은 누군가에겐 매주의 파티를, 누군가에겐 가끔의 점심 약속을 뜻합니다. 우리는 같은 질문을 각자 다른 언어로 번역하며 답하고 있었던 거죠.</p>
+ <p style='margin-bottom:14px'>그래서 처음부터 다시 만들었습니다. 익숙한 알파벳 네 글자만 빌려오고, 질문과 분석은 성격심리학에서 수십 년간 반복 확인된 차원을 바탕으로 한 문항씩 새로 썼습니다. 모든 질문은 형용사가 아니라 장면입니다. 그리고 결과는 네 글자로 끝나지 않고, 왜 그 결과가 나왔는지 당신의 답으로 증명합니다.</p>
+ <p style='margin-bottom:18px'>제 이름에는 우주가 들어 있습니다. 그래서인지 사람 하나하나가 각자의 궤도를 도는 작은 우주라는 말을 믿습니다. 유형은 사람을 가두는 상자가 아니라, 나를 이해하는 지도여야 합니다.</p>
+ <p class='mu' style='font-size:14px;text-align:right'>녹녹 대표 진우주</p></div>
+ <hr class='hr'><h2>기존 검사는 왜 흔들릴까</h2><p class='mu' style='font-size:14px;line-height:1.7;margin-bottom:8px'>같은 사람이 몇 주 뒤 다시 검사했을 때 39~76%가 다른 유형을 받았다는 보고가 있어요(Pittenger, 1993).</p>`;
+ CMP.forEach((c,i)=>{h+=`<div class='cmp'><p style='font-size:15px;font-weight:600'><span style='color:var(--a);margin-right:10px'>0${i+1}</span>${c[0]}</p><p class='x'>${c[1]}</p><p class='o'>→ ${c[2]}</p></div>`});
+ h+=`<p class='mu' style='font-size:13px;line-height:1.7;margin-top:8px'>네 축은 기존 유형 검사의 네 지표가 실제로 Big Five의 외향성·개방성·친화성·성실성을 측정한다는 연구(McCrae & Costa, 1989; Furnham 외, 2003)에 근거해 설계했어요.</p>
+ <hr class='hr'><h2>검사비</h2><p class='mu' style='font-size:14px;line-height:1.7;margin-bottom:16px'>JINIVERSE의 검사비는 돈이 아니라 세 가지 약속이에요. 이 약속이 지켜질 때 결과가 가장 정확해져요.</p>`;
+ ['되고 싶은 나가 아니라, 지난 몇 달간 실제로 그랬던 나로 답하겠습니다','정답을 찾지 않고 첫 느낌을 따르겠습니다','방해받지 않는 12분 동안 끝까지 하겠습니다'].forEach(t=>{h+=`<label class='pledge glass'><input type='checkbox' class='pl'><span>${t}</span></label>`});
+ h+=`<button class='cta' id='go' style='margin-top:18px'>약속하고 시작하기</button><p class='err' id='err'></p>`;
+ paint(h);
+ $('bk').onclick=goHome;
+ document.querySelectorAll('.pl').forEach(c=>c.onchange=()=>{c.parentElement.classList.toggle('on',c.checked);$('err').textContent=''});
+ $('go').onclick=()=>{
+  if(![...document.querySelectorAll('.pl')].every(c=>c.checked)){$('err').textContent='세 가지 약속에 모두 체크해 주세요';return}
+  ans={};isSample=false;seen={};act=0;xskip=false;save();showQ(0)}}
+
+function segs(){const done=Object.keys(ans).length;let h=`<div class='segs'>`;
+ for(let s=0;s<10;s++){const f=Math.max(0,Math.min(7,done-s*7));h+=`<div class='seg'><i style='width:${f/7*100}%'></i></div>`}return h+'</div>'}
+
+function showQ(p){mode='q';pos=p;locked=false;
+ const qi=ORDER[p],q=Q[qi],v=ans[qi];
+ paint(`<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:14px'>${backBtn('bk',p===0?'처음으로':'이전')}<span class='mu' style='font-size:13px'>${p+1} / 70</span></div>
+ ${segs()}
+ <div class='glass pad' style='margin-top:22px'>
+ <p class='eb'>${STOPS[Math.floor(p/7)]} 궤도</p>
+ <p style='font-size:22px;font-weight:600;line-height:1.5;letter-spacing:-.01em;margin-top:10px'>${q[2]}</p>
+ <div class='opts'><button class='opt A glass${v!==undefined&&v<3?' lean':''}' id='oA'><span class='k'>A</span>${q[3]}</button><button class='opt B glass${v!==undefined&&v>3?' lean':''}' id='oB'><span class='k'>B</span>${q[4]}</button></div>
+ <div class='scale'>${SZ.map((s,i)=>`<button class='dot' data-v='${i}' aria-label='${LBL[i]}' style='width:${s}px;height:${s}px;border-color:${COL[i]}'></button>`).join('')}</div>
+ <div class='scl'><span style='color:var(--a)'>A</span><span>반반</span><span style='color:var(--b)'>B</span></div></div>
+ <div style='display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px'><span class='eb' style='letter-spacing:.04em;line-height:1.5'>점으로 정도를 고르거나 카드를 누르세요(카드는 ‘꽤 가깝다’) · 키보드 1–7</span>${v!==undefined?`<button class='back' id='nx' style='flex:none'>다음 →</button>`:''}</div><p class='err' id='err'></p>`);
+ qT=Date.now();paintDots(v);
+ $('bk').onclick=()=>p===0?goHome():showQ(p-1);
+ app.querySelectorAll('.dot').forEach(b=>b.onclick=()=>pick(+b.dataset.v));
+ $('oA').onclick=()=>pick(v!==undefined&&v<3?v:1);
+ $('oB').onclick=()=>pick(v!==undefined&&v>3?v:5);
+ if($('nx'))$('nx').onclick=nextQ}
+
+function paintDots(v){app.querySelectorAll('.dot').forEach(d=>{const i=+d.dataset.v,on=i===v;d.classList.toggle('on',on);d.style.background=on?COL[i]:'transparent';d.style.boxShadow=on&&i!==3?`0 0 0 6px ${i<3?'rgba(139,124,255,.18)':'rgba(61,214,224,.16)'},0 0 24px ${COL[i]}`:'none'})}
+
+function pick(v){if(locked||(mode!=='q'&&mode!=='xq'))return;locked=true;
+ act+=Math.min(Math.max(Date.now()-qT,0),60000);
+ const m=mode,p=m==='q'?pos:xpos,key=m==='q'?ORDER[pos]:xkey,old=ans[key];
+ ans[key]=v;if(old!==undefined&&old!==v)xClean(ans);save();paintDots(v);
+ $('oA').classList.toggle('lean',v<3);$('oB').classList.toggle('lean',v>3);
+ clearTimeout(advT);advT=setTimeout(()=>{if(mode===m&&(m==='q'?pos:xpos)===p)(m==='q'?nextQ:nextX)()},300)}
+
+function nextQ(){if(mode!=='q')return;
+ if(ans[ORDER[pos]]===undefined){$('err').textContent='답을 먼저 골라 주세요';return}
+ if(pos===69){goX();return}
+ if((pos+1)%7===0&&!seen[pos]){seen[pos]=1;save();showBreak(Math.floor(pos/7));return}
+ showQ(pos+1)}
+
+document.addEventListener('keydown',e=>{if((mode!=='q'&&mode!=='xq')||e.metaKey||e.ctrlKey||e.altKey||e.repeat)return;if(e.key.length===1&&'1234567'.includes(e.key))pick(+e.key-1)});
+
+function showBreak(n){mode='brk';const b=BRK[n];
+ let h=`<div style='margin-bottom:14px'>${backBtn('bk','이전')}</div>${segs()}<div class='glass pad' style='margin-top:22px;min-height:300px'><p class='eb'>우주 휴게소 · ${STOPS[n]} 통과 · 점수와 무관해요</p><p style='font-size:26px;font-weight:700;line-height:1.4;letter-spacing:-.02em;margin:14px 0 18px'>${b.h}</p>`;
+ if(b.t==='f')h+=`<p class='lead'>${b.b}</p>`;
+ else h+=`<div>${b.o.map((o,i)=>`<button class='pop glass' data-i='${i}'>${o[0]}</button>`).join('')}</div><p class='lead' id='qp' style='margin-top:12px;min-height:1.75em'></p>`;
+ h+=`</div><button class='cta' id='go' style='margin-top:16px'>다음 궤도 · ${STOPS[n+1]}</button>`;
+ paint(h);
+ $('bk').onclick=()=>showQ(pos);
+ app.querySelectorAll('.pop').forEach(x=>x.onclick=()=>{app.querySelectorAll('.pop').forEach(y=>y.classList.remove('on'));x.classList.add('on');$('qp').textContent=b.o[+x.dataset.i][1]});
+ $('go').onclick=()=>showQ(pos+1)}
+
+function goX(){const pl=xPlan(ans),nx=pl.list.filter(i=>!has(ans,i));
+ if(!nx.length||xskip){showResult('live');return}
+ const k=pl.list.indexOf(nx[0]);
+ if(!pl.list.some(i=>has(ans,i)))showXIntro();else if(k===pl.n1&&pl.ax2.length&&!pl.list.slice(pl.n1).some(i=>has(ans,i)))showX2Intro();else showX(k)}
+function axRows(list,r){return list.map(a=>`<div class='li'><b>${a}</b><span>${AX[a].n} · ${AX[a].a} ${r.R[a].pa}% / ${100-r.R[a].pa}% ${AX[a].b}</span></div>`).join('')}
+function showXIntro(){mode='xi';const pl=xPlan(ans),b={};for(let i=0;i<70;i++)b[i]=ans[i];const r=score(b),m=pl.n1;
+ paint(`${backBtn('bk','이전')}<p class='eb' style='margin-top:28px'>추가 궤도</p><h2 style='margin-top:10px;font-size:26px'>경계에 걸친 축만 한 번 더 잴게요</h2>
+ <div class='glass pad' style='margin-top:18px'>${axRows(pl.ax1,r)}</div>
+ <p class='lead' style='margin-top:18px'>${pl.ax1.length>1?'이 축들은':'이 축은'} ${100-CFG.band}~${CFG.band}% 사이, 즉 경계형으로 나왔어요. 이 구간은 다시 검사하면 글자가 자주 뒤집혀서, 해당 축만 골라 처음 보는 장면 ${m}문항을 더 물어볼게요. 축마다 네 가지 측면을 한 번씩 다시 묻고, A와 B의 방향도 절반씩 섞었어요.${CFG.xseq?' 이걸 합쳐도 경계에 머문 축은 4문항이 더 이어져요.':''}</p>
+ <p class='mu' style='font-size:14px;line-height:1.7;margin-top:10px'>앞의 70문항 답과 합쳐서 다시 판정해요. 약 ${Math.max(1,Math.round(m*10/60))}분이면 끝나요.</p>
+ <button class='cta' id='go' style='margin-top:22px'>추가 ${m}문항 시작하기</button><button class='sub glass' id='skip'>건너뛰고 지금 결과 보기</button>`);
+ $('bk').onclick=()=>showQ(69);$('go').onclick=()=>showX(0);$('skip').onclick=()=>{xskip=true;save();showResult('live')}}
+function showX2Intro(){mode='xi';const pl=xPlan(ans),r=score(ans);
+ paint(`${backBtn('bk','이전')}<p class='eb' style='margin-top:28px'>추가 궤도 · 2단계</p><h2 style='margin-top:10px;font-size:24px'>아직 경계에 머문 축이 있어요</h2>
+ <div class='glass pad' style='margin-top:18px'>${axRows(pl.ax2,r)}</div>
+ <p class='lead' style='margin-top:18px'>추가 문항까지 합쳐도 ${100-CFG.band}~${CFG.band}% 안이라서, 이 축만 남은 ${pl.list.length-pl.n1}문항을 더 물어볼게요.</p>
+ <button class='cta' id='go' style='margin-top:22px'>이어서 하기</button><button class='sub glass' id='skip'>건너뛰고 지금 결과 보기</button>`);
+ $('bk').onclick=()=>showX(pl.n1-1);$('go').onclick=()=>showX(pl.n1);$('skip').onclick=()=>{xskip=true;save();showResult('live')}}
+function showX(k){const pl=xPlan(ans);if(k<0||k>=pl.list.length){goX();return}
+ mode='xq';xpos=k;locked=false;const key=pl.list[k],q=item(key),v=ans[key],a=q[0].slice(0,2);xkey=key;
+ paint(`<div style='display:flex;justify-content:space-between;align-items:center;margin-bottom:14px'>${backBtn('bk','이전')}<span class='mu' style='font-size:13px'>추가 ${k+1} / ${pl.list.length}</span></div>
+ <div class='segs'>${pl.list.map(i=>`<div class='seg'><i style='width:${has(ans,i)?100:0}%'></i></div>`).join('')}</div>
+ <div class='glass pad' style='margin-top:22px'>
+ <p class='eb'>추가 궤도 · ${AX[a].n}</p>
+ <p style='font-size:22px;font-weight:600;line-height:1.5;letter-spacing:-.01em;margin-top:10px'>${q[2]}</p>
+ <div class='opts'><button class='opt A glass${v!==undefined&&v<3?' lean':''}' id='oA'><span class='k'>A</span>${q[3]}</button><button class='opt B glass${v!==undefined&&v>3?' lean':''}' id='oB'><span class='k'>B</span>${q[4]}</button></div>
+ <div class='scale'>${SZ.map((s,i)=>`<button class='dot' data-v='${i}' aria-label='${LBL[i]}' style='width:${s}px;height:${s}px;border-color:${COL[i]}'></button>`).join('')}</div>
+ <div class='scl'><span style='color:var(--a)'>A</span><span>반반</span><span style='color:var(--b)'>B</span></div></div>
+ <div style='display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:14px'><span class='eb' style='letter-spacing:.04em;line-height:1.5'>점으로 정도를 고르거나 카드를 누르세요(카드는 ‘꽤 가깝다’) · 키보드 1–7</span>${v!==undefined?`<button class='back' id='nx' style='flex:none'>다음 →</button>`:''}</div><p class='err' id='err'></p>`);
+ qT=Date.now();paintDots(v);
+ $('bk').onclick=()=>k===0?showXIntro():(k===pl.n1&&pl.ax2.length?showX2Intro():showX(k-1));
+ app.querySelectorAll('.dot').forEach(b=>b.onclick=()=>pick(+b.dataset.v));
+ $('oA').onclick=()=>pick(v!==undefined&&v<3?v:1);
+ $('oB').onclick=()=>pick(v!==undefined&&v>3?v:5);
+ if($('nx'))$('nx').onclick=nextX}
+function nextX(){if(mode!=='xq')return;
+ if(!has(ans,xkey)){$('err').textContent='답을 먼저 골라 주세요';return}
+ const pl=xPlan(ans),k=pl.list.indexOf(xkey)+1;
+ if(k<=0||k>=pl.list.length){goX();return}
+ if(k===pl.n1&&pl.ax2.length&&!pl.list.slice(pl.n1).some(i=>has(ans,i))){showX2Intro();return}
+ showX(k)}
+function chosen(i){const v=ans[i],q=item(i);return v<3?q[3]:v>3?q[4]:'반반'}
+
+function showSample(){
+ const P1=[1,0,-1,2,-1,0,1,-2,1,0],P2=[0,-1,1,-1,0,1,-2,0,1,-1],cfg={EI:[P1,1],SN:[P1,-1],TF:[P1,-1],JP:[P2,0]};ans={};
+ AXK.forEach(a=>LISTS[a].forEach((qi,k)=>{const P=cfg[a][0],bias=cfg[a][1],s=Math.max(-3,Math.min(3,P[k%10]+bias)),raw=Q[qi][1]===AX[a].a?s:-s;ans[qi]=3-raw}));
+ let g=0,nx;while((nx=xNext(ans)).length&&g++<3)nx.forEach((qi,k)=>{const a=item(qi)[0].slice(0,2),P=cfg[a][0],bias=cfg[a][1],s=Math.max(-3,Math.min(3,P[(k+3)%10]+bias)),raw=item(qi)[1]===AX[a].a?s:-s;ans[qi]=3-raw});
+ showResult('sample')}
+function typeBlock(c){const t=TY[c];
+ let h=`<div class='two'><div><p class='eb' style='margin-bottom:8px'>빛나는 힘</p>${t[4].map(s=>`<p style='font-size:15px;line-height:1.6;margin:6px 0'>${s}</p>`).join('')}</div><div><p class='eb' style='margin-bottom:8px'>조심할 사각지대</p>${t[5].map(s=>`<p class='mu' style='font-size:14px;line-height:1.6;margin:6px 0'>${s}</p>`).join('')}</div></div>`;
+ [['스트레스를 받으면',t[6]],['관계와 사랑',t[7]],['일과 커리어',t[8]],['성장 포인트',t[9]]].forEach(z=>{h+=`<div class='sec'><p class='eb' style='margin-bottom:6px'>${z[0]}</p><p style='font-size:15px;line-height:1.75'>${z[1]}</p></div>`});
+ return h}
+
+function showResult(src){mode='res';isSample=src==='sample';
+ const {code,R}=score(ans),T=TY[code];let sec=null,when='';
+ if(src==='live'){sec=isNaN(act)?null:Math.round(act/1000);sDel(SAVE);sSet(LAST,{ans,sec,ts:Date.now()})}
+ else if(src==='last'){const l=sGet(LAST)||{};sec=typeof l.sec==='number'?l.sec:null;if(l.ts)when=new Date(l.ts).toLocaleDateString('ko-KR')}
+ else sec=640;
+ const qa=quality(ans,sec),rt4=Math.max(5,Math.round(AXK.reduce((p,a)=>p*rt(R[a].d,R[a].x>0)/100,1)*20)*5);lastRes={code,T,R};
+ let h=backBtn('bk','처음으로');
+ if(isSample)h+=`<p class='glass mu' style='margin-top:16px;padding:12px 16px;font-size:13px;border-radius:14px'>가상의 응답으로 만든 샘플 결과예요. 실제 결과도 이 구성으로 나와요.</p>`;
+ if(src==='last')h+=`<p class='glass mu' style='margin-top:16px;padding:12px 16px;font-size:13px;border-radius:14px'>${when?when+'에 ':''}완료한 지난 결과예요.</p>`;
+ h+=`<div class='glass pad' style='margin-top:20px;padding:32px 24px' id='s0'><p class='eb'>당신의 궤도</p><p class='code'>${code}</p>
+ <div class='letters'>${AXK.map(a=>`<span>${R[a].L===AX[a].a?AX[a].an:AX[a].bn}</span>`).join(`<span style='color:var(--dim)'>·</span>`)}</div>
+ <p style='font-size:24px;font-weight:700;letter-spacing:-.02em'>${T[0]} <span class='mu' style='font-weight:400;font-size:15px'>${T[1]}</span></p><p class='mu' style='font-size:15px;margin:6px 0 20px'>${T[2]}</p><p style='font-size:16px;line-height:1.9'>${T[3]}</p></div>${!isSample&&AXK.some(a=>R[a].d<=CFG.xtrig&&!R[a].x)?`<button class='sub glass' id='redoX' style='margin-top:12px'>경계형 축만 추가 문항으로 다시 판정하기</button>`:''}
+ <div class='nav glass'>${[['s1','네 개의 축'],['s2','나의 우주'],['s3','응답 품질'],['s4','공유 카드'],['s5','16개 궤도']].map(x=>`<button data-t='${x[0]}'>${x[1]}</button>`).join('')}</div>
+ <div id='s1' style='scroll-margin-top:80px'><h2 style='margin-top:28px'>네 개의 축</h2><p class='mu' style='font-size:14px;line-height:1.7'>보라는 왼쪽 성향, 청록은 오른쪽 성향이에요. 다시 검사했을 때 같은 4글자가 나올 가능성은 약 ${rt4}%로 추정돼요(가상 응답 1,000회 시뮬레이션 기준).</p>`;
+ AXK.forEach(a=>{const r=R[a],x=AX[a],bd=r.d<=CFG.band;
+  h+=`<div class='glass pad' style='margin-top:14px'><div style='display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap'><span style='font-size:16px;font-weight:600'>${x.n}</span><span style='display:flex;gap:6px;flex-wrap:wrap'>${r.x?`<span class='tag'>추가 ${r.x}문항 반영</span>`:''}<span class='tag${bd?' w':''}'>${clar(r.d)}</span></span></div>
+  <div style='display:flex;justify-content:space-between;font-size:14px;margin:16px 0 8px'><span style='${r.L===x.a?'font-weight:700;color:var(--a)':'color:var(--dim)'}'>${x.a} ${x.an} ${r.pa}%</span><span style='${r.L===x.b?'font-weight:700;color:var(--b)':'color:var(--dim)'}'>${100-r.pa}% ${x.bn} ${x.b}</span></div>
+  <div class='bar'><div class='l' style='width:${r.pa}%'></div><div class='r'></div></div><div style='margin-top:18px'>`;
+  [1,2,3,4].forEach(f=>{const fid=a+f,v=r.fac[fid],ft=FT[fid];h+=`<div class='fac'><span class='mu'>${ft[0]}</span><div><div class='bar' style='height:4px'><div class='l' style='width:${v}%'></div><div class='r'></div></div><span style='display:block;margin-top:5px'>${v>=58?ft[1]:v<=42?ft[2]:'상황에 따라 양쪽을 오가요'}</span></div><span style='text-align:right;color:${v>50?'var(--a)':v<50?'var(--b)':'var(--dim)'}'>${v>50?x.a:v<50?x.b:'·'}</span></div>`});
+  h+=`</div>`;
+  if(r.ev.length)h+=`<p class='eb' style='margin:18px 0 4px'>결정적 근거</p>`+r.ev.map(([i,s])=>`<div class='ev'><span class='mu'>${item(i)[2]}</span><br>${chosen(i)} <span class='eb'>· ${s===3?'매우 확실':'확실'}</span></div>`).join('');
+  else h+=`<p class='mu' style='font-size:13px;line-height:1.6;margin-top:16px'>이 축에는 한쪽으로 확실하게 기운 답이 없었어요. 여러 문항의 작은 기울기가 모여 결과가 정해졌어요.</p>`;
+  h+=`<p class='mu' style='font-size:13px;line-height:1.6;margin-top:12px'>${r.n}문항${r.x?`(추가 ${r.x}문항 포함)`:''} 중 ${r.opp}개는 반대 방향으로 답했어요. ${r.opp>=Math.round(r.n*0.3)?'반대 성향도 꽤 살아 있어요.':bd?'':'성향이 일관되게 드러났어요.'}${bd?(r.x?' 추가 문항까지 반영해도 경계형이에요. 두 성향을 비슷한 무게로 함께 가진 사람일 가능성이 높아요.':' 경계형이라 상황에 따라 다른 글자가 나올 수 있어요.'):''} 재검사 때 같은 글자가 나올 가능성은 약 ${rt(r.d,r.x>0)}%예요.</p></div>`});
+ h+=`</div><div id='s2' style='scroll-margin-top:80px'><hr class='hr'><h2>${T[0]}의 우주</h2><div class='glass pad' style='margin-top:14px'>${typeBlock(code)}</div>`;
+ const nb=AXK.filter(a=>R[a].d<=CFG.band).map(a=>{const i=AXK.indexOf(a),c=code.split('');c[i]=c[i]===AX[a].a?AX[a].b:AX[a].a;return c.join('')});
+ if(nb.length){h+=`<h2 style='margin-top:32px'>이웃 궤도</h2><p class='mu' style='font-size:14px;line-height:1.6;margin-bottom:12px'>경계형 축이 있어서, 한 글자만 다른 이 유형도 당신의 일부일 수 있어요.</p>`+nb.map(c=>`<div class='glass pad' style='margin-bottom:10px'><p style='font-size:15px;font-weight:600;margin-bottom:6px'>${c} · ${TY[c][0]}</p><p class='mu' style='font-size:14px;line-height:1.7'>${TY[c][3]}</p></div>`).join('')}
+ h+=`</div><div id='s3' style='scroll-margin-top:80px'><hr class='hr'><h2 style='margin-bottom:14px'>응답 품질</h2><div class='metrics'>${[['응답 일관성',qa.cons],['반반 응답',qa.neu+'개'],['응답 시간',sec===null?'–':Math.max(1,Math.round(sec/60))+'분'],['상충 응답',qa.flag+'쌍']].map(m=>`<div class='metric glass'><p class='eb'>${m[0]}</p><p>${m[1]}</p></div>`).join('')}</div>
+ <p class='mu' style='font-size:14px;line-height:1.7;margin-top:12px'>${qa.ok?'엇갈린 답이나 불성실한 응답 패턴이 발견되지 않았어요. 신뢰할 수 있는 응답이에요.':qa.warn.map(w=>WM[w]).join(' ')+' 컨디션 좋은 날 다시 해보면 더 정확해져요.'}${qa.note?` 다만 반반 응답이 ${qa.neu}개로 많아서 축 점수가 50% 근처로 모였을 수 있어요.`:''}</p>
+ <p class='eb' style='margin-top:10px;letter-spacing:.04em;line-height:1.6'>응답 시간은 문항 화면에 머문 시간만 더해요. 휴게소와 자리를 비운 시간은 빠져요.</p></div>
+ <div id='s4' style='scroll-margin-top:80px'><hr class='hr'><h2>공유 카드</h2><p class='mu' style='font-size:14px;line-height:1.6;margin-bottom:14px'>인스타그램 스토리 비율(9:16) 이미지로 저장하거나 바로 공유할 수 있어요.</p>
+ <button class='cta' id='mk'>공유 카드 만들기</button><div id='cardOut'></div></div>
+ <div id='s5' style='scroll-margin-top:80px'><hr class='hr'><h2 style='margin-bottom:14px'>16개의 궤도</h2><div class='g16'>${Object.keys(TY).map(c=>`<button class='tb glass${c===code?' on':''}' data-c='${c}'><b>${c}</b><br><span class='mu' style='font-size:13px'>${TY[c][0]}</span></button>`).join('')}</div><div id='gv'></div></div>
+ <button class='cta' id='re' style='margin-top:32px'>${isSample?'내 결과 찾으러 가기':'다시 검사하기'}</button>
+ ${FOOT}`;
+ paint(h);
+ $('bk').onclick=goHome;
+ $('re').onclick=showIntent;
+ if($('redoX'))$('redoX').onclick=()=>{xskip=false;isSample=false;act=typeof sec==='number'?sec*1000:NaN;save();goX()};
+ app.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>$(b.dataset.t).scrollIntoView({behavior:'smooth',block:'start'}));
+ $('mk').onclick=makeCard;
+ app.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{app.querySelectorAll('.tb').forEach(y=>y.classList.remove('on'));b.classList.add('on');const c=b.dataset.c,t=TY[c];
+  $('gv').innerHTML=`<div class='glass pad fade' style='margin-top:12px'><p style='font-size:17px;font-weight:700'>${c} · ${t[0]} <span class='mu' style='font-weight:400;font-size:14px'>${t[1]}</span></p><p class='mu' style='font-size:14px;margin:4px 0 10px'>${t[2]}</p><p style='font-size:15px;line-height:1.75'>${t[3]}</p></div>`})}
+
+function rr(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+W,Y,X+W,Y+H,r);x.arcTo(X+W,Y+H,X,Y+H,r);x.arcTo(X,Y+H,X,Y,r);x.arcTo(X,Y,X+W,Y,r);x.closePath()}
+function wrap(x,text,X,Y,maxW,lh){let line='',yy=Y;for(const ch of text){const t=line+ch;if(x.measureText(t).width>maxW&&line){x.fillText(line,X,yy);line=ch;yy+=lh}else line=t}if(line)x.fillText(line,X,yy);return yy}
+
+async function makeCard(){if(!lastRes)return;const {code,T,R}=lastRes,out=$('cardOut');
+ out.innerHTML=`<p class='mu' style='font-size:13px;margin-top:12px'>카드를 만드는 중이에요</p>`;
+ try{await document.fonts.load('800 200px Pretendard');await document.fonts.load('400 40px Pretendard')}catch(e){}
+ const c=document.createElement('canvas');c.width=1080;c.height=1920;const x=c.getContext('2d'),F='Pretendard,-apple-system,sans-serif';
+ x.fillStyle='#050507';x.fillRect(0,0,1080,1920);
+ [[180,300,760,'rgba(139,124,255,.55)'],[960,1560,820,'rgba(61,214,224,.35)'],[820,380,420,'rgba(255,120,200,.16)']].forEach(o=>{const g=x.createRadialGradient(o[0],o[1],0,o[0],o[1],o[2]);g.addColorStop(0,o[3]);g.addColorStop(1,'rgba(0,0,0,0)');x.fillStyle=g;x.fillRect(0,0,1080,1920)});
+ x.fillStyle='rgba(255,255,255,.8)';for(let i=0;i<70;i++){const sx=(i*197)%1080,sy=(i*331)%1920,r=(i%5===0)?2.2:1.2;x.globalAlpha=.25+(i%4)*.15;x.beginPath();x.arc(sx,sy,r,0,Math.PI*2);x.fill()}x.globalAlpha=1;
+ x.fillStyle='rgba(255,255,255,.7)';x.font=`500 32px ${F}`;x.textAlign='left';x.fillText('JINIVERSE',90,150);
+ x.fillStyle='rgba(255,255,255,.45)';x.font=`400 28px ${F}`;x.textAlign='right';x.fillText('나의 궤도',990,150);
+ rr(x,70,240,940,1440,48);x.fillStyle='rgba(255,255,255,.06)';x.fill();x.strokeStyle='rgba(255,255,255,.16)';x.lineWidth=2;x.stroke();
+ x.textAlign='center';const g2=x.createLinearGradient(200,0,880,0);g2.addColorStop(0,'#ffffff');g2.addColorStop(.5,'#d9d3ff');g2.addColorStop(1,'#c9f6ff');
+ x.fillStyle=g2;x.font=`800 220px ${F}`;x.fillText(code,540,560);
+ x.fillStyle='rgba(255,255,255,.55)';x.font=`400 34px ${F}`;x.fillText(AXK.map(a=>R[a].L===AX[a].a?AX[a].an:AX[a].bn).join('  ·  '),540,640);
+ x.fillStyle='#fff';x.font=`700 76px ${F}`;x.fillText(T[0],540,780);
+ x.fillStyle='rgba(255,255,255,.55)';x.font=`400 36px ${F}`;x.fillText(T[1],540,840);
+ x.fillStyle='rgba(255,255,255,.8)';x.font=`400 38px ${F}`;wrap(x,T[2],540,930,800,54);
+ let y=1090;AXK.forEach(a=>{const r=R[a],ax=AX[a];
+  x.textAlign='left';x.font=`${r.L===ax.a?700:400} 34px ${F}`;x.fillStyle=r.L===ax.a?'#8B7CFF':'rgba(255,255,255,.4)';x.fillText(`${ax.a} ${r.pa}%`,150,y);
+  x.textAlign='right';x.font=`${r.L===ax.b?700:400} 34px ${F}`;x.fillStyle=r.L===ax.b?'#3DD6E0':'rgba(255,255,255,.4)';x.fillText(`${100-r.pa}% ${ax.b}`,930,y);
+  rr(x,150,y+24,780,14,7);x.fillStyle='rgba(61,214,224,.85)';x.fill();
+  if(r.pa>0){rr(x,150,y+24,Math.max(14,780*r.pa/100),14,7);x.fillStyle='#8B7CFF';x.fill()}
+  y+=130});
+ x.textAlign='center';x.fillStyle='rgba(255,255,255,.5)';x.font=`400 30px ${F}`;x.fillText('70개의 장면으로 찾은 나의 궤도',540,1610);
+ x.fillStyle='rgba(255,255,255,.75)';x.font=`600 34px ${F}`;x.fillText('너의 궤도는? · JINIVERSE',540,1790);
+ x.fillStyle='rgba(255,255,255,.35)';x.font=`400 26px ${F}`;x.fillText('녹녹',540,1840);
+ c.toBlob(blob=>{if(!blob){out.innerHTML=`<p class='err'>이 브라우저에서는 카드를 만들 수 없어요</p>`;return}
+  if(cardUrl)URL.revokeObjectURL(cardUrl);
+  const url=URL.createObjectURL(blob),file=new File([blob],`jiniverse-${code}.png`,{type:'image/png'});cardUrl=url;
+  out.innerHTML=`<img class='shareimg fade' src='${url}' alt='${code} 공유 카드'><a class='sub glass' id='dl' href='${url}' download='jiniverse-${code}.png' style='display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--tx);margin-top:14px'>이미지 저장하기</a>${navigator.canShare&&navigator.canShare({files:[file]})?`<button class='sub glass' id='sh'>바로 공유하기</button>`:''}`;
+  const sh=$('sh');if(sh)sh.onclick=()=>navigator.share({files:[file],title:'나의 JINIVERSE 궤도',text:`나의 궤도는 ${code} · ${T[0]}`}).catch(()=>{})},'image/png')}
+
+function showGallery(){mode='gal';
+ paint(backBtn('bk','처음으로')+`<p class='eb' style='margin-top:28px'>내 유형 바로 보기</p><h2 style='margin:10px 0 18px;font-size:26px'>16개의 궤도</h2><div class='g16'>${Object.keys(TY).map(c=>`<button class='tb glass' data-c='${c}'><b>${c}</b><br><span class='mu' style='font-size:13px'>${TY[c][0]}</span></button>`).join('')}</div><div id='gv'></div>${FOOT}`);
+ $('bk').onclick=goHome;
+ app.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{app.querySelectorAll('.tb').forEach(y=>y.classList.remove('on'));b.classList.add('on');const c=b.dataset.c,t=TY[c];
+  $('gv').innerHTML=`<div class='glass pad fade' style='margin-top:20px;padding:28px 24px'><p class='code' style='font-size:56px;margin-top:0'>${c}</p><p style='font-size:21px;font-weight:700'>${t[0]} <span class='mu' style='font-weight:400;font-size:14px'>${t[1]}</span></p><p class='mu' style='font-size:14px;margin:4px 0 16px'>${t[2]}</p><p style='font-size:16px;line-height:1.85'>${t[3]}</p>${typeBlock(c)}<p class='mu' style='font-size:13px;line-height:1.6;margin-top:16px'>알고 있는 유형이 정말 나와 맞는지는 70문항 검사로 확인해 보세요. 축별 퍼센트와 근거까지 보여드려요.</p></div>`;
+  $('gv').scrollIntoView({behavior:'smooth',block:'start'})})}
+
+goHome();
+</script>
+</body>
+</html>
