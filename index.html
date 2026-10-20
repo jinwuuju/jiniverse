@@ -76,8 +76,8 @@ h2{font-size:22px;font-weight:700;letter-spacing:-.02em;margin:0 0 8px}
 .metric{padding:16px;border-radius:16px}
 .metric p+p{font-size:24px;font-weight:700;margin-top:4px}
 .g16{display:grid;grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:8px}
-.tb{text-align:left;padding:14px;border-radius:16px;line-height:1.45;transition:all .2s}
-.tb:hover,.tb.on{border-color:rgba(139,124,255,.7);background:rgba(139,124,255,.10)}
+.tb,.cmb{text-align:left;padding:14px;border-radius:16px;line-height:1.45;transition:all .2s}
+.tb:hover,.tb.on,.cmb:hover,.cmb.on{border-color:rgba(139,124,255,.7);background:rgba(139,124,255,.10)}
 .sec{padding:18px 0;border-top:1px solid var(--line)}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:18px 0}
 .nav{position:sticky;top:12px;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:6px;border-radius:999px;margin:20px 0 8px;scrollbar-width:none}
@@ -143,9 +143,87 @@ function xPlan(an){const b={};for(let i=0;i<70;i++)if(has(an,i))b[i]=an[i];
 function xNext(an){return xPlan(an).list.filter(i=>!has(an,i))}
 function xClean(an){const p=xPlan(an).list;Object.keys(an).forEach(k=>{if(+k>=70&&!p.includes(+k))delete an[k]})}
 /*ENGINE_END*/
+// ===== 풍부한 결과 콘텐츠: 축 글자(8극), 기질(4), 결정(4), 갈등(4), 측면 극(32), 유형 간 소통(16) =====
+const PL={
+E:{charge:['좋아하는 사람들과 수다 떨며 하루를 정리하기','새로운 장소나 모임에서 자극 받기','몸을 쓰는 활동을 누군가와 함께하기'],drain:['며칠씩 혼자 고립된 채 일하기','말할 상대 없이 혼자 결정해야 하는 상황','반응 없는 메시지와 길어지는 침묵'],manual:'생각을 말로 꺼내며 정리하는 편이에요. 제가 한 말을 최종 결론이 아니라 생각하는 과정으로 들어 주세요.',env:['대화와 협업이 자연스러운 열린 환경','진행 상황을 자주 공유하는 팀']},
+I:{charge:['방해받지 않는 혼자만의 시간','익숙한 공간에서 책, 음악, 산책으로 조용히 몰입하기','믿을 수 있는 한두 명과의 깊은 대화'],drain:['쉴 틈 없이 이어지는 미팅과 행사','준비 없이 즉석에서 발표하거나 답해야 하는 상황','여럿이 동시에 말하는 시끄러운 자리'],manual:'중요한 이야기는 미리 알려 주면 더 좋은 답을 드릴 수 있어요. 말이 없다고 관심이 없는 게 아니에요.',env:['집중할 수 있는 조용한 공간','글로 정리해 공유하는 소통 문화']},
+S:{charge:['요리, 정리, 운동, 만들기처럼 손을 쓰는 일','익숙한 루틴을 하나씩 해내는 성취감','자연이나 맛있는 음식처럼 오감이 즐거운 경험'],drain:['구체적인 설명 없이 모호하게 던져진 일','현실성 없는 아이디어 회의가 길게 이어질 때','사실 확인 없이 추측으로 결정하는 분위기'],manual:'무엇을, 언제까지, 어떤 기준으로 해야 하는지 구체적으로 알려 주세요. 예시 하나가 긴 설명보다 빨라요.',env:['역할과 절차가 분명한 곳','결과물이 눈에 보이는 일']},
+N:{charge:['새로운 아이디어나 주제를 깊이 파고들기','미래 계획과 상상을 마음껏 펼쳐 보기','영감을 주는 책, 영화, 대화'],drain:['같은 방식을 반복하는 단순 업무','큰 그림 없이 세부 지시만 내려오는 상황','‘원래 그렇게 해’라는 답'],manual:'왜 이 일을 하는지 큰 그림을 먼저 알려 주세요. 세부 사항을 놓치면 부드럽게 짚어 주면 고마워요.',env:['새로운 시도가 허용되는 곳','방향과 의미가 공유되는 프로젝트']},
+T:{charge:['복잡한 문제를 논리적으로 풀어내기','실력을 키우는 공부와 도전','효율적으로 일을 끝내고 결과를 확인하기'],drain:['기준 없이 감정적으로 흘러가는 논의','논리보다 분위기로 정해지는 결정','비효율을 알면서도 그대로 두는 조직'],manual:'돌려 말하지 않아도 괜찮아요. 근거와 함께 말해 주면 감정 상하지 않고 받아들여요. 제 직설에 상처받았다면 그것도 알려 주세요.',env:['성과와 기준이 공정하게 평가되는 곳','전문성을 인정받는 역할']},
+F:{charge:['마음이 통하는 사람과의 진솔한 대화','누군가에게 도움이 됐다는 확인','내가 아끼는 가치와 연결된 활동'],drain:['갈등이 풀리지 않은 냉랭한 분위기','사람을 숫자로만 보는 결정','내 노력이 당연하게 여겨질 때'],manual:'결과만큼 과정의 노력을 알아봐 주면 큰 힘이 나요. 피드백은 좋은 점과 함께 주면 훨씬 잘 받아들여요.',env:['서로를 존중하는 따뜻한 분위기','사람에게 의미 있는 영향을 주는 일']},
+J:{charge:['할 일 목록을 하나씩 지워 나가기','공간과 일정을 정돈하기','계획대로 끝낸 하루를 돌아보기'],drain:['갑작스러운 일정 변경','결정이 계속 미뤄지는 상황','마감 직전까지 확정되지 않는 일'],manual:'일정이나 계획이 바뀌면 최대한 일찍 알려 주세요. 미리 알면 누구보다 잘 맞춰요.',env:['일정과 우선순위가 분명한 곳','마감과 책임이 명확한 일']},
+P:{charge:['계획 없이 떠나는 짧은 여행이나 산책','새로운 걸 즉흥적으로 시도하기','여러 관심사를 자유롭게 오가기'],drain:['분 단위로 짜인 빡빡한 일정','정해진 방식만 따르라는 요구','융통성 없는 규칙과 절차'],manual:'방향과 마감만 정해 주면 방식은 맡겨 주세요. 중간 점검을 한두 번 잡아 주면 마감도 잘 지켜요.',env:['자율성과 유연성이 있는 곳','변화가 많은 역동적인 일']}};
+const BND={EI:'사람과의 시간과 혼자만의 시간이 둘 다 필요해요. 한쪽이 길어지면 다른 쪽으로 균형을 맞춰 주세요.',SN:'사실과 아이디어를 둘 다 중요하게 봐요. 구체적인 예시와 큰 그림을 함께 주면 가장 잘 이해해요.',TF:'논리와 마음을 둘 다 살펴요. 근거를 분명히 하되 말의 온도도 신경 써 주면 좋아요.',JP:'계획과 유연함을 상황에 따라 오가요. 큰 일정은 미리, 세부는 여유 있게 맞춰 주세요.'};
+const TEMP={
+SJ:{nm:'수호자 궤도',core:'안정과 책임을 중시해요. 약속된 것을 지키고 공동체를 지탱하는 데서 의미를 찾아요.',team:'팀의 기반을 만드는 사람이에요. 일정, 품질, 절차를 챙겨 프로젝트가 무너지지 않게 해요.',learn:'구체적인 예시, 단계별 실습, 반복 연습으로 확실하게 익혀요.',motive:'성실함에 대한 인정, 안정적인 보상, 분명한 소속감',caution:'변화가 빠른 환경에서 기존 방식을 고수하다 기회를 놓칠 수 있어요.'},
+SP:{nm:'탐험가 궤도',core:'자유와 행동을 중시해요. 지금 이 순간에 직접 부딪히며 결과를 만들어요.',team:'위기 해결사예요. 예상 못 한 문제가 터졌을 때 가장 빠르게 움직여요.',learn:'직접 해보고 시행착오로 배워요. 이론보다 현장 실습이 훨씬 잘 맞아요.',motive:'눈에 보이는 즉각적인 성과, 재미, 자율성',caution:'장기 계획과 반복 관리가 약해 좋은 기회를 끝까지 살리지 못할 수 있어요.'},
+NT:{nm:'설계자 궤도',core:'이해와 역량을 중시해요. 세상의 원리를 파악하고 더 나은 시스템을 만들고 싶어 해요.',team:'전략가예요. 구조를 설계하고 비효율을 찾아내 개선 방향을 제시해요.',learn:'원리와 모델부터 이해한 뒤 스스로 적용해 봐요. 왜 그런지 납득돼야 배워요.',motive:'지적 도전, 전문성, 자율적인 문제 해결',caution:'사람의 감정과 실행 디테일을 과소평가해 좋은 설계가 현장에서 막힐 수 있어요.'},
+NF:{nm:'항해자 궤도',core:'의미와 성장을 중시해요. 나와 타인이 진짜 자신이 되도록 돕는 데서 보람을 느껴요.',team:'촉매자예요. 팀의 비전과 사기를 끌어올리고 사람 사이를 연결해요.',learn:'의미와 맥락이 있는 이야기로 배워요. 토론과 글쓰기로 생각이 깊어져요.',motive:'가치 있는 목표, 진정성 있는 관계, 개인적 성장',caution:'이상이 높아 현실의 한계에 쉽게 실망하고, 남의 감정을 과하게 떠안을 수 있어요.'}};
+const DEC={
+TJ:{style:'기준을 세우고 빠르게 결정해요. 장단점을 따진 뒤 가장 합리적인 안을 골라 바로 실행해요.',trap:'정보가 부족한데도 결론을 서두르거나, 결정이 사람들에게 미칠 영향을 늦게 알아차려요.',check:['이 결정으로 가장 불편해질 사람은 누구고, 그 사람에게 어떻게 설명할까?','빨리 결론 내린 이유가 근거 때문인지, 불확실함이 불편해서인지?','결정을 하루 미루면 실제로 잃는 게 있나?']},
+TP:{style:'논리적으로 분석하되 결론은 열어 둬요. 더 나은 해법이 보이면 언제든 바꿀 준비가 돼 있어요.',trap:'분석을 계속하느라 결정이 늦어지거나, 결정 자체를 남에게 미루게 돼요.',check:['지금 정보로 70% 확신이 든다면 일단 정해도 되지 않을까?','결정 마감일을 스스로 정해 두었나?','이 분석이 결정을 위한 것인지, 흥미 때문인지?']},
+FJ:{style:'사람과 관계를 고려해 모두가 납득할 결론을 빨리 찾아요. 합의한 결정은 책임감 있게 밀고 가요.',trap:'갈등을 피하려고 불편한 진실을 덮거나, 남의 기대에 맞춘 결정을 내 결정으로 착각해요.',check:['모두를 만족시키려다 정작 문제는 그대로 남지 않았나?','내가 원하는 건 무엇이고, 그게 결정에 반영됐나?','객관적인 기준으로만 보면 결론이 달라지나?']},
+FP:{style:'내 마음과 가치에 맞는지를 기준으로 결정해요. 납득되지 않으면 쉽게 정하지 않아요.',trap:'마음이 확실해질 때까지 기다리다 시기를 놓치거나, 현실적인 비용을 과소평가해요.',check:['이 선택의 현실적인 비용(돈, 시간, 에너지)을 숫자로 적어 봤나?','지금 정하지 않는 것도 하나의 선택이라는 걸 알고 있나?','믿을 만한 사람에게 장단점을 말로 설명해 볼 수 있나?']}};
+const CON={
+ET:{react:'문제를 바로 꺼내 논리적으로 정면 돌파하려 해요.',misread:'문제를 풀려는 건데, 상대에게는 사람을 비판하는 것처럼 들릴 수 있어요.',script:'‘네 잘못이라는 게 아니라, 이 부분을 같이 해결하고 싶어서 그래. 네 생각은 어때?’',tip:'결론을 말하기 전에 상대의 입장을 한 문장으로 요약해 확인해 보세요.'},
+IT:{react:'감정이 가라앉을 때까지 거리를 두고 혼자 분석해요.',misread:'정리할 시간을 갖는 건데, 상대에게는 침묵이 차갑거나 무관심하게 보일 수 있어요.',script:'‘지금은 생각을 정리할 시간이 필요해. 내일 저녁에 다시 이야기하자.’',tip:'물러날 때는 언제 다시 이야기할지 시간을 꼭 알려 주세요.'},
+EF:{react:'감정을 솔직하게 표현하고 바로 대화로 풀고 싶어 해요.',misread:'빨리 풀고 싶은 건데, 준비가 안 된 상대는 몰아붙인다고 느낄 수 있어요.',script:'‘나 지금 이런 점이 서운했어. 너도 시간이 필요하면 말해 줘.’',tip:'내 감정을 말한 뒤에는 상대가 답할 시간을 충분히 주세요.'},
+IF:{react:'갈등을 피하며 속으로 오래 곱씹어요. 참다가 한 번에 거리를 두기도 해요.',misread:'괜찮다는 말을 믿었던 상대는 갑작스러운 거리두기에 당황해요.',script:'‘사실 그때 조금 서운했어. 크게 문제 삼으려는 건 아닌데 알고 있었으면 해서.’',tip:'작은 서운함은 작을 때 말하는 게 관계를 지키는 길이에요.'}};
+const FX={
+EI1a:['사람을 만나야 에너지가 차요. 혼자 오래 있으면 기분까지 가라앉기 쉬워요.','하루 15분, 휴대폰 없이 혼자 있는 시간을 가져 보세요. 사람 없이도 회복되는 방법이 하나 생기면 바쁜 시기에 덜 지쳐요.'],
+EI1b:['혼자 있는 시간이 있어야 에너지가 차요. 사람을 좋아해도 연속된 약속은 배터리를 빠르게 닳게 해요.','약속 사이에 회복 시간을 일정처럼 넣어 두세요. 그리고 이번 주에 편한 사람 한 명과 짧게 만나 관계 에너지도 채워 보세요.'],
+EI2a:['말하면서 생각이 정리돼요. 회의와 대화 속에서 아이디어가 가장 잘 나와요.','중요한 결정 전에는 말하기 전에 세 줄 메모를 먼저 써 보세요. 말로 정리한 생각이 더 단단해져요.'],
+EI2b:['속으로 충분히 정리한 뒤에 말해요. 즉석 질문보다 미리 받은 질문에 훨씬 좋은 답을 해요.','다음 회의에서는 덜 정리된 생각이라도 한 번은 먼저 꺼내 보세요. 미리 한 줄 적어 가면 훨씬 쉬워요.'],
+EI3a:['넓은 인맥에서 기회와 정보가 들어와요. 다만 깊은 속 이야기를 나눌 사람이 부족하다고 느낄 수 있어요.','이번 주에는 넓히기 대신 깊어지기를 해 보세요. 자주 보는 사람 한 명에게 요즘 진짜 고민이 뭔지 물어보는 거예요.'],
+EI3b:['소수와 깊게 연결돼요. 신뢰는 단단하지만 새로운 기회가 들어오는 통로는 좁을 수 있어요.','오랜만인 지인 한 명에게 안부 메시지를 보내 보세요. 새 기회는 의외로 느슨한 관계에서 자주 들어와요.'],
+EI4a:['활기찬 자극 속에서 기분과 집중력이 올라가요. 조용한 환경이 오래 이어지면 쉽게 지루해져요.','깊은 집중이 필요한 일 하나를 25분만 조용한 곳에서 해 보세요. 짧게 끊으면 생각보다 할 만해요.'],
+EI4b:['차분한 환경에서 실력이 가장 잘 나와요. 소음과 자극이 많은 곳에서는 생각보다 빨리 지쳐요.','북적이는 자리에 갈 때는 중간에 쉬어 갈 시간과 장소를 미리 정해 두세요. 잠깐 빠져나오는 것도 전략이에요.'],
+SN1a:['직접 확인한 사실과 데이터를 믿어요. 근거 없는 주장에 쉽게 휘둘리지 않아요.','결정할 일 하나에 대해 직감을 한 줄 적어 두고, 나중에 맞았는지 확인해 보세요. 직감도 쓸 만한 정보인지 알게 돼요.'],
+SN1b:['말 사이의 의도와 패턴을 빨리 읽어요. 다만 근거보다 해석이 앞서 오해가 생기기도 해요.','오늘 판단 하나를 ‘확인된 사실’과 ‘내 해석’ 두 칸으로 나눠 적어 보세요.'],
+SN2a:['지금 할 수 있는 현실적인 일에 집중해요. 실행력은 좋지만 장기 방향이 흐려질 수 있어요.','1년 뒤 내 모습을 세 문장으로 적어 보세요. 지금의 실행력에 방향이 생겨요.'],
+SN2b:['미래와 가능성을 자주 상상해요. 비전은 크지만 오늘 할 일이 뒤로 밀리기 쉬워요.','머릿속 큰 계획 하나에 ‘오늘 15분 안에 할 수 있는 첫 행동’을 붙여 바로 해 보세요.'],
+SN3a:['구체적인 예시와 단계로 이해해요. 설명서와 실습이 있으면 누구보다 정확하게 익혀요.','최근 익힌 일 하나에 대해 ‘이 단계들이 왜 이런 순서일까?’를 정리해 보세요. 응용력이 붙어요.'],
+SN3b:['큰 그림과 원리로 이해해요. 구조를 빨리 잡지만 세부 단계를 건너뛰기 쉬워요.','이해했다고 느낀 내용을 구체적인 예시 하나로 설명해 보세요. 설명이 막히는 곳이 아직 덜 이해한 부분이에요.'],
+SN4a:['검증된 방식으로 안정적인 결과를 내요. 새로운 방식에는 충분한 근거가 있어야 움직여요.','실패해도 괜찮은 작은 영역에서 새로운 방법 하나를 시험해 보세요. 안 먹어본 메뉴나 새 앱 하나부터요.'],
+SN4b:['새로운 방식과 변화에서 활력을 얻어요. 다만 잘 되던 것까지 바꾸려다 에너지를 낭비할 수 있어요.','바꾸고 싶은 것 하나에 대해 ‘지금 방식의 진짜 문제는 무엇인가’를 한 줄로 써 보세요. 쓸 수 없다면 그대로 두는 것도 실력이에요.'],
+TF1a:['논리와 합리성으로 결정해요. 공정하지만 결정에 영향을 받는 사람의 마음을 놓칠 수 있어요.','최근 내린 결정 하나를 떠올리고, 가장 영향을 받은 사람에게 할 한 문장을 준비해 보세요.'],
+TF1b:['사람과 의미를 기준으로 결정해요. 따뜻하지만 객관적인 비용을 과소평가할 수 있어요.','마음이 기우는 선택 하나의 장단점을 표로 적어 보세요. 마음이 맞는지 확인하는 과정이에요.'],
+TF2a:['솔직하고 명확하게 말해요. 신뢰를 얻지만 의도보다 날카롭게 들릴 때가 있어요.','오늘 피드백 하나를 ‘좋은 점 하나, 바꿀 점 하나, 구체적 제안’ 순서로 말해 보세요. 내용은 그대로, 전달력은 훨씬 좋아져요.'],
+TF2b:['상대가 받아들일 수 있게 말하는 데 능숙해요. 다만 핵심이 흐려져 상대가 문제를 모를 수 있어요.','부드럽게 말하되 마지막 문장은 ‘그래서 이 부분은 꼭 바꿔 줘’처럼 분명하게 끝내 보세요.'],
+TF3a:['문제를 해결해 주는 방식으로 도와요. 실질적이지만 상대가 위로를 원할 때는 엇갈릴 수 있어요.','누군가 고민을 털어놓으면 먼저 ‘해결책이 필요해, 아니면 들어 주길 원해?’라고 물어보세요.'],
+TF3b:['마음을 먼저 알아주는 방식으로 도와요. 큰 위로가 되지만 문제 자체는 그대로 남을 때도 있어요.','공감한 뒤에 ‘내가 도울 수 있는 일이 있을까?’ 한 문장을 덧붙여 보세요. 위로가 행동으로 이어져요.'],
+TF4a:['같은 기준을 모두에게 적용하는 것이 공정하다고 봐요. 일관되지만 딱한 사정 앞에서 냉정해 보일 수 있어요.','규칙을 적용하기 전에 ‘이 규칙이 원래 지키려던 목적은 무엇인가’를 한 번 생각해 보세요.'],
+TF4b:['각자의 사정을 헤아리는 것이 공정하다고 봐요. 따뜻하지만 예외가 쌓이면 다른 사람에게 불공평해질 수 있어요.','예외를 두고 싶을 때 ‘다른 사람에게도 같은 예외를 줄 수 있나?’를 스스로 물어보세요.'],
+JP1a:['미리 계획해야 마음이 편해요. 준비성은 뛰어나지만 계획이 틀어지면 스트레스가 커요.','이번 주 계획표에 일부러 빈칸 시간을 두 칸 넣어 두세요. 변수가 생겨도 계획 안에서 처리돼요.'],
+JP1b:['흐름에 맡길 때 자연스러워요. 적응력이 좋지만 중요한 일이 뒤로 밀릴 수 있어요.','아침에 ‘오늘 꼭 할 일 1개’만 정하고 시작해 보세요. 하루 전체를 계획할 필요는 없어요.'],
+JP2a:['미리미리 순서대로 끝내요. 마감 걱정은 없지만 끝난 일도 계속 다듬느라 지칠 수 있어요.','진행 중인 일 하나를 완성도 80%에서 먼저 공유해 피드백을 받아 보세요. 혼자 100%를 만드는 것보다 빨라요.'],
+JP2b:['마감 압박에서 집중력이 살아나요. 결과는 내지만 막판 변수에 취약해요.','다음 마감 3일 전에 나만의 가짜 마감을 캘린더에 넣어 보세요. 압박의 힘은 살리고 위험은 줄여요.'],
+JP3a:['빨리 결정하고 마무리해야 편해요. 추진력이 있지만 더 좋은 선택지를 놓칠 수 있어요.','오늘 내린 결정 하나를 하룻밤만 묵혀 보세요. 그래도 같다면 확신을 갖고 가면 돼요.'],
+JP3b:['가능성을 열어두는 걸 좋아해요. 유연하지만 결정이 늦어져 주변이 기다리게 될 수 있어요.','미뤄 둔 결정 하나에 ‘언제까지 정할지’ 날짜부터 정해 보세요.'],
+JP4a:['정돈된 환경과 루틴에서 컨디션이 좋아요. 루틴이 깨지면 하루 전체가 흔들리기 쉬워요.','루틴이 깨진 날을 위한 최소 루틴 3가지를 정해 두세요. 그것만 해도 오늘은 성공이에요.'],
+JP4b:['유연하고 자유로운 생활이 편해요. 다만 물건과 일정을 찾느라 시간을 쓰기도 해요.','열쇠, 지갑, 충전기처럼 자주 찾는 물건 3개만 고정 자리를 정해 보세요. 자유는 지키고 낭비는 줄여요.']};
+const BRS={E:'둘 다 말하며 생각해요. 대화가 빠르게 불붙지만, 둘 다 말만 하고 정리는 안 할 수 있어요.',I:'둘 다 혼자만의 시간을 존중해요. 편안하지만 중요한 이야기를 서로 미루기 쉬워요.',S:'둘 다 현실적이에요. 일이 착착 진행되지만 새로운 시도는 둘 다 망설일 수 있어요.',N:'둘 다 아이디어를 좋아해요. 대화가 끝없이 확장되지만 실행 담당이 비기 쉬워요.',T:'둘 다 논리로 대화해요. 효율적이지만 서운함이 쌓여도 서로 못 알아챌 수 있어요.',F:'둘 다 마음을 먼저 살펴요. 따뜻하지만 불편한 이야기를 둘 다 피할 수 있어요.',J:'둘 다 계획을 좋아해요. 든든하지만 계획이 서로 다를 때 둘 다 양보하지 않을 수 있어요.',P:'둘 다 유연해요. 즐겁지만 정해지는 게 없어 일이 밀릴 수 있어요.'};
+const BRD={EI:'상대는 생각할 시간이 필요해요. 중요한 질문은 미리 보내고, 즉답을 재촉하지 마세요.',IE:'상대는 말하며 생각을 정리해요. 상대의 말을 최종 결론으로 받아들이지 말고, 내 생각도 짧게라도 먼저 꺼내 보세요.',SN:'상대는 큰 그림부터 말해요. ‘그래서 첫 단계는 뭐야?’라고 물어 아이디어를 현실로 끌어와 주세요.',NS:'상대는 구체적인 사실을 원해요. 아이디어를 말할 때 예시 하나와 다음 단계를 함께 제시하세요.',TF:'상대는 말의 온도에 민감해요. 지적하기 전에 노력을 한 문장 인정해 주면 같은 말도 훨씬 잘 전달돼요.',FT:'상대는 직설이 기본값이에요. 차갑게 들려도 대개 악의는 없어요. 서운하면 감정보다 구체적인 사실로 말해 보세요.',JP:'상대는 열린 상태가 편해요. 마감과 꼭 정할 것만 분명히 하고 나머지는 맡겨 주세요.',PJ:'상대는 정해져야 편해요. 계획 변경은 미리 알리고, 확답할 수 있는 날짜를 먼저 약속해 주세요.'};
 const STOPS=['수성','금성','지구','화성','목성','토성','천왕성','해왕성','카이퍼 벨트','태양계 밖'];
 const BRK=[{t:'f',h:'금성의 하루는 1년보다 길어요',b:'금성이 한 바퀴 자전하는 데는 지구 시간으로 약 243일, 태양을 한 바퀴 도는 데는 약 225일이 걸려요.'},{t:'p',h:'우주선에 하나만 가져갈 수 있다면',o:[['라면','무중력에서는 국물이 공처럼 떠다녀요. 그릇보다 빨대를 챙기세요.'],['플레이리스트','우주는 진공이라 소리가 전달되지 않아요. 이어폰은 필수예요.'],['내 베개','현명한 선택이에요. 우주비행사도 침낭을 벽에 고정하고 잡니다.']]},{t:'f',h:'토성은 물에 뜰 수도 있어요',b:'토성의 평균 밀도는 물보다 낮아요. 토성이 들어갈 만큼 거대한 욕조가 있다면 떠오를 거예요.'},{t:'p',h:'외계인을 처음 만났을 때 첫마디는',o:[['안녕하세요','예의 바른 지구 대표. 은하 외교관 후보로 등록되었습니다.'],['MBTI 뭐예요?','그쪽은 16개가 아니라 1,600개쯤 있을지도 몰라요.'],['와이파이 돼요?','참고로 화성까지는 신호가 가는 데만 수 분이 걸려요.']]},{t:'f',h:'지금 보는 햇빛은 8분 전의 태양이에요',b:'빛이 태양에서 지구까지 오는 데 약 8분 20초가 걸려요. 우리는 언제나 조금 과거의 태양을 봅니다.'},{t:'p',h:'갑자기 무중력이 된다면 제일 먼저',o:[['공중제비','즐기는 타입. 우주비행사들도 첫날엔 다들 돈다고 해요.'],['물방울 먹기','무중력에서 물은 동그란 구슬이 돼요.'],['잡을 곳 찾기','우주정거장 벽에 손잡이가 많은 데는 이유가 있어요.']]},{t:'f',h:'달은 매년 조금씩 멀어지고 있어요',b:'달은 해마다 약 3.8cm씩 지구에서 멀어져요. 손톱이 자라는 속도와 비슷해요.'},{t:'p',h:'지금 기분과 가장 닮은 천체는',o:[['유성','결과가 궁금하군요. 두 궤도만 더 가면 돼요.'],['달','좋은 페이스예요. 그대로 가요.'],['블랙홀','물 한 잔 마시고 와도 괜찮아요. 답은 그대로 남아 있어요.']]},{t:'f',h:'당신은 말 그대로 별의 조각이에요',b:'우리 몸을 이루는 탄소, 산소, 철은 아주 오래전 별 속에서 만들어졌어요. 이제 마지막 7문항이에요.'}];
 const CMP=[['질문이 모호해요','‘나는 사교적이다’처럼 사람마다 해석이 다른 형용사형 문항','모든 문항을 구체적인 일상 장면으로. 누구나 같은 의미로 읽어요'],['51%와 99%가 같은 글자예요','경계선 근처도 무조건 한 글자로 잘라서 재검사 때 뒤집혀요',`축마다 퍼센트와 선명도를 보여주고, ${100-CFG.band}~${CFG.band}% 경계형 축은 추가 문항으로 한 번 더 재요`],['이상적인 나를 고르게 돼요','한쪽 답이 더 좋아 보여서 바라는 모습을 선택하게 돼요','두 선택지를 똑같이 괜찮은 답으로 써서 정답이 없어요'],['한 가지 면만 봐요','사람 만나는 걸 좋아하는지만으로 외향·내향을 판정해요','축마다 4개, 총 16개 측면을 따로 재요'],['근거가 없어요','네 글자와 설명문만 주고 이유는 알려주지 않아요','결정적 답변을 근거로 보여주고, 응답 일관성까지 점검해요']];
+const TX={
+ISTJ:{kw:['#원칙주의','#신뢰의아이콘','#체크리스트'],q:['그거 저번에 정한 대로 하면 돼.','확인해 볼게. 근거가 뭐야?'],day:'계획한 일을 모두 끝내고, 정돈된 집에서 좋아하는 드라마 한 편을 보는 날.',hob:['정리와 수납','등산이나 걷기','역사 다큐멘터리']},
+ISFJ:{kw:['#세심한배려','#기억력최강','#조용한버팀목'],q:['괜찮아? 밥은 먹었어?','내가 할게, 신경 쓰지 마.'],day:'가까운 사람들을 챙기고 고맙다는 말을 들은 뒤, 따뜻한 차 한 잔과 함께 쉬는 날.',hob:['베이킹과 요리','식물 키우기','뜨개질 같은 손 공예']},
+INFJ:{kw:['#통찰','#의미추구','#깊은대화'],q:['그 사람 사실 이런 마음이었을 것 같아.','이게 결국 무슨 의미가 있을까?'],day:'좋아하는 카페에서 혼자 글을 쓰다가, 저녁엔 마음 맞는 한 사람과 깊은 대화를 나누는 날.',hob:['일기와 글쓰기','심리학 책 읽기','혼자 가는 전시회']},
+INTJ:{kw:['#전략가','#독립적','#장기계획'],q:['그건 비효율적이야.','그래서 5년 뒤엔 어떻게 될까?'],day:'방해 없이 몰입해 복잡한 문제를 풀고, 세워 둔 목표에 한 걸음 다가간 날.',hob:['체스와 전략 게임','논픽션 독서','혼자 하는 장기 프로젝트']},
+ISTP:{kw:['#해결사','#효율','#손재주'],q:['일단 해 보면 알아.','줘 봐, 고쳐 줄게.'],day:'아무도 간섭하지 않는 주말, 무언가를 분해하고 고치거나 새 장비를 써 보는 날.',hob:['DIY와 수리','자전거나 클라이밍','혼자 하는 드라이브']},
+ISFP:{kw:['#감성','#취향','#다정함'],q:['그냥 그게 좋았어.','너 하고 싶은 대로 해.'],day:'날씨 좋은 날 음악을 들으며 산책하다, 예쁜 장면을 발견해 사진으로 남긴 날.',hob:['사진과 그림','플레이리스트 만들기','동네 산책']},
+INFP:{kw:['#이상주의','#공감','#상상력'],q:['나는 이게 맞는 것 같아.','그 마음 너무 이해돼.'],day:'좋아하는 이야기에 빠져 있다가, 오래 품은 생각을 글이나 그림으로 표현해 낸 날.',hob:['소설이나 웹툰 창작','감성 영화 보기','혼자 카페 탐방']},
+INTP:{kw:['#왜?','#분석','#아이디어뱅크'],q:['근데 그게 논리적으로 맞아?','잠깐, 이거 재밌는데?'],day:'흥미로운 주제를 발견해 시간 가는 줄 모르고 파고든 날.',hob:['퍼즐과 코딩','과학 유튜브','온라인 토론']},
+ESTP:{kw:['#행동파','#순발력','#분위기메이커'],q:['일단 가 보자!','고민할 시간에 해 보면 돼.'],day:'즉흥적으로 떠난 곳에서 새로운 사람들과 신나게 놀고, 작은 모험에 성공한 날.',hob:['스포츠와 액티비티','즉흥 여행','맛집 탐방']},
+ESFP:{kw:['#에너자이저','#분위기','#지금이순간'],q:['오늘 뭐 재밌는 거 없어?','다 같이 사진 찍자!'],day:'좋아하는 사람들과 맛있는 걸 먹으며 웃다가, 그 순간을 영상으로 남긴 날.',hob:['모임과 파티 기획','춤과 노래','쇼핑과 스타일링']},
+ENFP:{kw:['#열정','#가능성','#아이디어폭죽'],q:['헐 대박, 우리 이거 해 보자!','너 진짜 잘할 것 같아!'],day:'새로운 사람을 만나 밤새 이야기하다 함께 해 볼 프로젝트가 생긴 날.',hob:['새로운 원데이 클래스','여행 계획 세우기','사이드 프로젝트']},
+ENTP:{kw:['#토론왕','#발상전환','#도전'],q:['반대로 생각해 보면?','그 규칙, 꼭 그래야 해?'],day:'불가능해 보이던 문제에 기발한 해법을 내고, 열띤 토론에서 판을 뒤집은 날.',hob:['토론과 스터디','창업 아이디어 구상','전략 보드게임']},
+ESTJ:{kw:['#리더십','#실행력','#질서'],q:['그래서 담당자가 누구야?','기한 정하고 바로 진행하자.'],day:'복잡하던 일이 계획대로 착착 마무리되고, 팀과 함께 성과를 확인한 날.',hob:['운동 루틴','모임 운영','재테크 공부']},
+ESFJ:{kw:['#챙김','#분위기조율','#공동체'],q:['다들 괜찮지? 불편한 사람 없어?','우리 다 같이 한번 모이자!'],day:'소중한 사람들이 모인 자리를 준비했는데 모두가 즐거워한 날.',hob:['홈파티','봉사활동','요리']},
+ENFJ:{kw:['#멘토','#따뜻한카리스마','#비전'],q:['너라면 충분히 할 수 있어.','우리가 함께라면 바꿀 수 있어.'],day:'누군가가 내 조언 덕분에 한 뼘 성장했다는 이야기를 들은 날.',hob:['강연과 스피치','커뮤니티 활동','코칭과 멘토링']},
+ENTJ:{kw:['#지휘관','#목표지향','#결단력'],q:['목표가 뭐야? 그럼 거꾸로 계획하자.','결정했어, 바로 실행하자.'],day:'도전적인 목표를 세우고 팀을 이끌어 예상보다 빨리 달성한 날.',hob:['경영과 투자 공부','경쟁 스포츠','네트워킹 모임']}};
 const SZ=[42,34,27,18,27,34,42],COL=['#8B7CFF','#8B7CFF','#8B7CFF','rgba(255,255,255,.35)','#3DD6E0','#3DD6E0','#3DD6E0'];
 const LBL=['A에 매우 가깝다','A에 꽤 가깝다','A에 약간 가깝다','반반','B에 약간 가깝다','B에 꽤 가깝다','B에 매우 가깝다'];
 const WM={mix:'같은 측면을 다른 장면으로 물은 문항들에서 서로 엇갈린 답이 많았어요.',neu:'반반 응답이 많아 성향이 충분히 드러나지 않았어요.',run:'같은 칸을 연달아 고른 구간이 길었어요.',fast:'문항당 응답 시간이 매우 짧았어요.'};
@@ -165,7 +243,7 @@ function full(a){return !!a&&Q.every((_,i)=>Number.isInteger(a[i])&&a[i]>=0&&a[i
 function goHome(){mode='home';const s=sGet(SAVE),n=s&&s.ans?Object.keys(s.ans).filter(k=>+k<70).length:0,xp=n===70&&!s.xskip&&xNext(s.ans).length>0,last=sGet(LAST),lc=last&&full(last.ans)?score(last.ans).code:'';
  paint(`<span class='pill glass'><i></i>녹녹 · JINIVERSE v1.1</span>
  <h1>나는 어떤 궤도를<br>도는 사람일까?</h1>
- <p class='lead'>해석이 갈리는 형용사 대신 70개의 일상 장면으로, 당신이 도는 16개의 궤도 중 하나를 찾아드려요. 결과에는 그 이유가 되는 당신의 답이 함께 실려요.</p>
+ <p class='lead'>해석이 갈리는 형용사 대신 70개의 일상 장면으로, 당신이 도는 16개의 궤도 중 하나를 찾아드려요. 결과에는 그 이유가 되는 당신의 답과 함께, 16개 측면으로 만든 나만의 해석, 소통 가이드, 7일 성장 미션이 실려요.</p>
  <div class='chips'><span class='chip glass'>70문항 + 경계 축 추가</span><span class='chip glass'>약 12분</span><span class='chip glass'>4축 × 4측면</span><span class='chip glass'>16유형</span></div>
  ${(n>0&&n<70)||xp?`<button class='cta' id='bResume'>이어서 하기 · ${n<70?n+' / 70':'추가 문항'}</button><button class='sub glass' id='bStart'>처음부터 다시 하기</button>`:`<button class='cta' id='bStart'>70문항으로 내 궤도 찾기</button>`}
  ${lc?`<button class='sub glass' id='bLast'>지난 결과 다시 보기 · ${lc}</button>`:''}
@@ -315,8 +393,8 @@ function showResult(src){mode='res';isSample=src==='sample';
  if(src==='last')h+=`<p class='glass mu' style='margin-top:16px;padding:12px 16px;font-size:13px;border-radius:14px'>${when?when+'에 ':''}완료한 지난 결과예요.</p>`;
  h+=`<div class='glass pad' style='margin-top:20px;padding:32px 24px' id='s0'><p class='eb'>당신의 궤도</p><p class='code'>${code}</p>
  <div class='letters'>${AXK.map(a=>`<span>${R[a].L===AX[a].a?AX[a].an:AX[a].bn}</span>`).join(`<span style='color:var(--dim)'>·</span>`)}</div>
- <p style='font-size:24px;font-weight:700;letter-spacing:-.02em'>${T[0]} <span class='mu' style='font-weight:400;font-size:15px'>${T[1]}</span></p><p class='mu' style='font-size:15px;margin:6px 0 20px'>${T[2]}</p><p style='font-size:16px;line-height:1.9'>${T[3]}</p></div>${!isSample&&AXK.some(a=>R[a].d<=CFG.xtrig&&!R[a].x)?`<button class='sub glass' id='redoX' style='margin-top:12px'>경계형 축만 추가 문항으로 다시 판정하기</button>`:''}
- <div class='nav glass'>${[['s1','네 개의 축'],['s2','나의 우주'],['s3','응답 품질'],['s4','공유 카드'],['s5','16개 궤도']].map(x=>`<button data-t='${x[0]}'>${x[1]}</button>`).join('')}</div>
+ <p style='font-size:24px;font-weight:700;letter-spacing:-.02em'>${T[0]} <span class='mu' style='font-weight:400;font-size:15px'>${T[1]}</span></p><p class='mu' style='font-size:15px;margin:6px 0 12px'>${T[2]}</p><div class='chips' style='margin:0 0 18px'>${TX[code].kw.map(k=>`<span class='chip glass'>${k}</span>`).join('')}</div><p style='font-size:16px;line-height:1.9'>${T[3]}</p></div>${!isSample&&AXK.some(a=>R[a].d<=CFG.xtrig&&!R[a].x)?`<button class='sub glass' id='redoX' style='margin-top:12px'>경계형 축만 추가 문항으로 다시 판정하기</button>`:''}
+ <div class='nav glass'>${[['s1','네 개의 축'],['s2','유형 해석'],['s6','나의 지문'],['s7','에너지'],['s8','일·배움'],['s9','관계'],['s10','성장 미션'],['s3','응답 품질'],['s4','공유 카드'],['s5','16개 궤도']].map(x=>`<button data-t='${x[0]}'>${x[1]}</button>`).join('')}</div>
  <div id='s1' style='scroll-margin-top:80px'><h2 style='margin-top:28px'>네 개의 축</h2><p class='mu' style='font-size:14px;line-height:1.7'>보라는 왼쪽 성향, 청록은 오른쪽 성향이에요. 다시 검사했을 때 같은 4글자가 나올 가능성은 약 ${rt4}%로 추정돼요(가상 응답 1,000회 시뮬레이션 기준).</p>`;
  AXK.forEach(a=>{const r=R[a],x=AX[a],bd=r.d<=CFG.band;
   h+=`<div class='glass pad' style='margin-top:14px'><div style='display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap'><span style='font-size:16px;font-weight:600'>${x.n}</span><span style='display:flex;gap:6px;flex-wrap:wrap'>${r.x?`<span class='tag'>추가 ${r.x}문항 반영</span>`:''}<span class='tag${bd?' w':''}'>${clar(r.d)}</span></span></div>
@@ -327,10 +405,10 @@ function showResult(src){mode='res';isSample=src==='sample';
   if(r.ev.length)h+=`<p class='eb' style='margin:18px 0 4px'>결정적 근거</p>`+r.ev.map(([i,s])=>`<div class='ev'><span class='mu'>${item(i)[2]}</span><br>${chosen(i)} <span class='eb'>· ${s===3?'매우 확실':'확실'}</span></div>`).join('');
   else h+=`<p class='mu' style='font-size:13px;line-height:1.6;margin-top:16px'>이 축에는 한쪽으로 확실하게 기운 답이 없었어요. 여러 문항의 작은 기울기가 모여 결과가 정해졌어요.</p>`;
   h+=`<p class='mu' style='font-size:13px;line-height:1.6;margin-top:12px'>${r.n}문항${r.x?`(추가 ${r.x}문항 포함)`:''} 중 ${r.opp}개는 반대 방향으로 답했어요. ${r.opp>=Math.round(r.n*0.3)?'반대 성향도 꽤 살아 있어요.':bd?'':'성향이 일관되게 드러났어요.'}${bd?(r.x?' 추가 문항까지 반영해도 경계형이에요. 두 성향을 비슷한 무게로 함께 가진 사람일 가능성이 높아요.':' 경계형이라 상황에 따라 다른 글자가 나올 수 있어요.'):''} 재검사 때 같은 글자가 나올 가능성은 약 ${rt(r.d,r.x>0)}%예요.</p></div>`});
- h+=`</div><div id='s2' style='scroll-margin-top:80px'><hr class='hr'><h2>${T[0]}의 우주</h2><div class='glass pad' style='margin-top:14px'>${typeBlock(code)}</div>`;
+ h+=`</div><div id='s2' style='scroll-margin-top:80px'><hr class='hr'><h2>${T[0]}의 우주</h2><div class='glass pad' style='margin-top:14px'>${typeExtra(code,'res')}${typeBlock(code)}</div>`;
  const nb=AXK.filter(a=>R[a].d<=CFG.band).map(a=>{const i=AXK.indexOf(a),c=code.split('');c[i]=c[i]===AX[a].a?AX[a].b:AX[a].a;return c.join('')});
  if(nb.length){h+=`<h2 style='margin-top:32px'>이웃 궤도</h2><p class='mu' style='font-size:14px;line-height:1.6;margin-bottom:12px'>경계형 축이 있어서, 한 글자만 다른 이 유형도 당신의 일부일 수 있어요.</p>`+nb.map(c=>`<div class='glass pad' style='margin-bottom:10px'><p style='font-size:15px;font-weight:600;margin-bottom:6px'>${c} · ${TY[c][0]}</p><p class='mu' style='font-size:14px;line-height:1.7'>${TY[c][3]}</p></div>`).join('')}
- h+=`</div><div id='s3' style='scroll-margin-top:80px'><hr class='hr'><h2 style='margin-bottom:14px'>응답 품질</h2><div class='metrics'>${[['응답 일관성',qa.cons],['반반 응답',qa.neu+'개'],['응답 시간',sec===null?'–':Math.max(1,Math.round(sec/60))+'분'],['상충 응답',qa.flag+'쌍']].map(m=>`<div class='metric glass'><p class='eb'>${m[0]}</p><p>${m[1]}</p></div>`).join('')}</div>
+ h+=`</div>${richSections(code,R)}<div id='s3' style='scroll-margin-top:80px'><hr class='hr'><h2 style='margin-bottom:14px'>응답 품질</h2><div class='metrics'>${[['응답 일관성',qa.cons],['반반 응답',qa.neu+'개'],['응답 시간',sec===null?'–':Math.max(1,Math.round(sec/60))+'분'],['상충 응답',qa.flag+'쌍']].map(m=>`<div class='metric glass'><p class='eb'>${m[0]}</p><p>${m[1]}</p></div>`).join('')}</div>
  <p class='mu' style='font-size:14px;line-height:1.7;margin-top:12px'>${qa.ok?'엇갈린 답이나 불성실한 응답 패턴이 발견되지 않았어요. 신뢰할 수 있는 응답이에요.':qa.warn.map(w=>WM[w]).join(' ')+' 컨디션 좋은 날 다시 해보면 더 정확해져요.'}${qa.note?` 다만 반반 응답이 ${qa.neu}개로 많아서 축 점수가 50% 근처로 모였을 수 있어요.`:''}</p>
  <p class='eb' style='margin-top:10px;letter-spacing:.04em;line-height:1.6'>응답 시간은 문항 화면에 머문 시간만 더해요. 휴게소와 자리를 비운 시간은 빠져요.</p></div>
  <div id='s4' style='scroll-margin-top:80px'><hr class='hr'><h2>공유 카드</h2><p class='mu' style='font-size:14px;line-height:1.6;margin-bottom:14px'>인스타그램 스토리 비율(9:16) 이미지로 저장하거나 바로 공유할 수 있어요.</p>
@@ -343,10 +421,51 @@ function showResult(src){mode='res';isSample=src==='sample';
  $('re').onclick=showIntent;
  if($('redoX'))$('redoX').onclick=()=>{xskip=false;isSample=false;act=typeof sec==='number'?sec*1000:NaN;save();goX()};
  app.querySelectorAll('.nav button').forEach(b=>b.onclick=()=>$(b.dataset.t).scrollIntoView({behavior:'smooth',block:'start'}));
- $('mk').onclick=makeCard;
+ $('mk').onclick=makeCard;bindRich(code);
  app.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{app.querySelectorAll('.tb').forEach(y=>y.classList.remove('on'));b.classList.add('on');const c=b.dataset.c,t=TY[c];
   $('gv').innerHTML=`<div class='glass pad fade' style='margin-top:12px'><p style='font-size:17px;font-weight:700'>${c} · ${t[0]} <span class='mu' style='font-weight:400;font-size:14px'>${t[1]}</span></p><p class='mu' style='font-size:14px;margin:4px 0 10px'>${t[2]}</p><p style='font-size:15px;line-height:1.75'>${t[3]}</p></div>`})}
 
+function tempKey(L){return L[1]==='S'?(L[3]==='J'?'SJ':'SP'):(L[2]==='T'?'NT':'NF')}
+function typeExtra(c,mode){const x=TX[c],L=c.split('');let h='';
+ if(mode==='gal')h+=`<div class='chips' style='margin:16px 0 0'>${x.kw.map(k=>`<span class='chip glass'>${k}</span>`).join('')}</div>`;
+ h+=`<div class='sec' style='margin-top:16px'><p class='eb' style='margin-bottom:6px'>이런 말을 자주 해요</p>${x.q.map(s=>`<div class='ev'>‘${s}’</div>`).join('')}</div>`;
+ h+=`<div class='two'><div><p class='eb' style='margin-bottom:8px'>완벽한 하루</p><p style='font-size:15px;line-height:1.7'>${x.day}</p></div><div><p class='eb' style='margin-bottom:8px'>잘 맞는 취미</p>${x.hob.map(s=>`<p style='font-size:15px;line-height:1.6;margin:4px 0'>${s}</p>`).join('')}</div></div>`;
+ if(mode==='gal'){const t=TEMP[tempKey(L)],d=DEC[L[2]+L[3]],k=CON[L[0]+L[2]];
+  h+=[[t.nm+' · 팀에서의 역할',t.team],['결정 스타일과 함정',d.style+' '+d.trap],['갈등이 생기면',k.react+' '+k.tip]].map(z=>`<div class='sec'><p class='eb' style='margin-bottom:6px'>${z[0]}</p><p style='font-size:15px;line-height:1.75'>${z[1]}</p></div>`).join('')}
+ return h}
+function richSections(code,R){const L=code.split(''),bd=AXK.map(a=>R[a].d<=CFG.band),F=[];
+ AXK.forEach(a=>[1,2,3,4].forEach(f=>{const id=a+f,v=R[a].fac[id],p=v>=50?'a':'b';F.push({a,id,v,p,e:Math.abs(v-50),lt:AX[a][p]})}));
+ const byE=[...F].sort((x,y)=>y.e-x.e),top=byE.slice(0,3),rev=F.filter(x=>x.e>=8&&(x.v>50)!==(R[x.a].L===AX[x.a].a)),flex=F.filter(x=>x.e<8);
+ const fd=x=>FT[x.id][x.p==='a'?1:2],sx=x=>`${x.lt} ${x.p==='a'?x.v:100-x.v}%`,pn=x=>x.p==='a'?AX[x.a].an:AX[x.a].bn;
+ const sec=(id,t,sub,body)=>`<div id='${id}' style='scroll-margin-top:80px'><hr class='hr'><h2>${t}</h2>${sub?`<p class='mu' style='font-size:14px;line-height:1.7'>${sub}</p>`:''}${body}</div>`;
+ const box=(t,body)=>`<div class='glass pad' style='margin-top:14px'><p class='eb' style='margin-bottom:6px'>${t}</p>${body}</div>`;
+ const row=(b,t,s)=>`<div class='li'><b>${b}</b><span>${t?`<strong style='font-weight:600'>${t}</strong><br>`:''}${s}</span></div>`;
+ const P=s=>`<p style='font-size:15px;line-height:1.75;margin:6px 0'>${s}</p>`;
+ const both=k=>AXK.flatMap((a,i)=>bd[i]?[PL[AX[a].a][k][0],PL[AX[a].b][k][0]]:PL[L[i]][k].slice(0,2));
+ let h='';
+ h+=sec('s6','나의 궤도 지문',`같은 ${code}라도 16개 측면의 조합은 사람마다 달라요. 아래 내용은 당신의 측면 점수만으로 만든 해석이에요.`,
+  box('가장 뚜렷한 측면 TOP 3',top.map((x,k)=>row('0'+(k+1),`${FT[x.id][0]} · ${sx(x)}`,`${fd(x)}. ${FX[x.id+x.p][0]}`)).join(''))+
+  box('숨은 반전',rev.length?rev.map(x=>row('↺',`${FT[x.id][0]} · ${sx(x)}`,`전체로는 ${R[x.a].L===AX[x.a].a?AX[x.a].an:AX[x.a].bn}(${R[x.a].L}) 쪽이지만 이 측면은 ${pn(x)}(${x.lt}) 쪽이에요. ${FX[x.id+x.p][0]}`)).join(''):P('네 축 모두 하위 측면이 같은 방향을 가리켜요. 겉으로 보이는 모습과 속의 성향이 일관된 편이에요.'))+
+  (flex.length?box('상황에 따라 오가는 측면',P(`${flex.map(x=>FT[x.id][0]).join(', ')}. 이 측면들은 장면에 따라 다르게 움직여요. 유연함이라는 강점이 되기도, 스스로도 헷갈리는 지점이 되기도 해요.`)):''));
+ h+=sec('s7','에너지와 사용 설명서','무엇이 나를 채우고 닳게 하는지 알면 컨디션 관리가 쉬워져요. 경계형 축은 양쪽 내용을 함께 담았어요.',
+  `<div class='two' style='margin:0'>${box('이럴 때 충전돼요',both('charge').map(s=>P('＋ '+s)).join(''))}${box('이럴 때 방전돼요',both('drain').map(s=>P('－ '+s)).join(''))}</div>`+
+  box('나를 대하는 법 · 가까운 사람에게 보여 주세요',AXK.map((a,i)=>row(bd[i]?'⇄':L[i],AX[a].n,bd[i]?BND[a]:PL[L[i]].manual)).join('')));
+ const tk=tempKey(L),t=TEMP[tk],dk=L[2]+L[3],dc=DEC[dk],alt=tempKey([L[0],L[1]==='S'?'N':'S',L[2],L[3]]);
+ h+=sec('s8','일과 배움','',
+  box(`기질 · ${t.nm} (${tk})`,P(t.core)+row('◆','팀에서의 역할',t.team)+row('◆','잘 배우는 방법',t.learn)+row('◆','동기를 끌어올리는 것',t.motive)+row('◆','주의할 점',t.caution)+(bd[1]?`<p class='mu' style='font-size:13px;margin-top:10px'>정보 축이 경계형이라 ${TEMP[alt].nm}의 특징도 함께 가지고 있을 수 있어요.</p>`:''))+
+  box(`결정 스타일 · ${dk}`,P(dc.style)+row('!','빠지기 쉬운 함정',dc.trap)+`<p class='eb' style='margin:16px 0 4px'>중요한 결정 전 체크리스트</p>`+dc.check.map(s=>row('☐','',s)).join('')+(bd[2]||bd[3]?`<p class='mu' style='font-size:13px;margin-top:10px'>판단이나 생활 축이 경계형이라 이웃 스타일의 체크리스트도 함께 참고하세요.</p>`:''))+
+  box('잘 맞는 일 환경',AXK.flatMap((a,i)=>bd[i]?[PL[AX[a].a].env[0]+' 또는 '+PL[AX[a].b].env[0]]:PL[L[i]].env).map(s=>P('· '+s)).join('')));
+ const ck=L[0]+L[2],cn=CON[ck];
+ h+=sec('s9','관계와 소통','',
+  box(`갈등 스타일 · ${ck}`,P(cn.react)+row('?','상대가 오해하기 쉬운 점',cn.misread)+row('→','이렇게 말해 보세요',cn.script)+row('✓','관계를 지키는 습관',cn.tip))+
+  box('16개 궤도와 소통하기',P('상대 유형을 고르면 잘 통하는 지점, 부딪히기 쉬운 지점, 다리를 놓는 방법을 보여 드려요. 다른 글자가 많다고 나쁜 관계라는 뜻은 아니에요.')+`<div class='g16' style='margin-top:12px'>${Object.keys(TY).map(c=>`<button class='cmb glass' data-c='${c}'><b>${c}</b><br><span class='mu' style='font-size:13px'>${TY[c][0]}</span></button>`).join('')}</div><div id='cmv'></div>`));
+ h+=sec('s10','7일 궤도 수정 미션','가장 치우친 측면부터 반대쪽 근육을 가볍게 써 보는 미션이에요. 성향을 바꾸자는 게 아니라, 필요할 때 꺼내 쓸 도구를 하나 더 갖자는 거예요. 하루 하나, 5분이면 충분해요.',
+  box('DAY 1 – 7',byE.slice(0,7).map((x,k)=>row('D'+(k+1),`${FT[x.id][0]} · ${sx(x)}`,FX[x.id+x.p][1])).join('')));
+ return h}
+function commHtml(me,you){const m=me.split(''),y=you.split(''),dif=m.filter((c,i)=>c!==y[i]).length;
+ const head=me===you?'같은 유형끼리예요. 서로를 가장 빨리 이해하지만, 같은 약점도 함께 가지고 있어요.':dif===1?'한 글자만 달라요. 대부분 잘 통하고, 다른 한 축에서만 조율하면 돼요.':dif===2?'두 글자가 달라요. 통하는 부분과 부딪히는 부분이 반반이에요.':'세 글자 이상 달라요. 오해가 생길 지점이 많지만, 그만큼 서로의 빈 곳을 채워 줄 수 있어요.';
+ return `<div class='glass pad fade' style='margin-top:12px'><p style='font-size:17px;font-weight:700'>${me} ↔ ${you} · ${TY[you][0]}</p><p class='mu' style='font-size:14px;line-height:1.7;margin:6px 0 4px'>${head}</p>${AXK.map((a,i)=>`<div class='li'><b>${m[i]===y[i]?'＝':'≠'}</b><span><strong style='font-weight:600'>${AX[a].n} · ${m[i]} ${m[i]===y[i]?'＝':'↔'} ${y[i]}</strong><br>${m[i]===y[i]?BRS[m[i]]:BRD[m[i]+y[i]]}</span></div>`).join('')}</div>`}
+function bindRich(code){app.querySelectorAll('.cmb').forEach(b=>b.onclick=()=>{app.querySelectorAll('.cmb').forEach(y=>y.classList.remove('on'));b.classList.add('on');$('cmv').innerHTML=commHtml(code,b.dataset.c)})}
 function rr(x,X,Y,W,H,r){x.beginPath();x.moveTo(X+r,Y);x.arcTo(X+W,Y,X+W,Y+H,r);x.arcTo(X+W,Y+H,X,Y+H,r);x.arcTo(X,Y+H,X,Y,r);x.arcTo(X,Y,X+W,Y,r);x.closePath()}
 function wrap(x,text,X,Y,maxW,lh){let line='',yy=Y;for(const ch of text){const t=line+ch;if(x.measureText(t).width>maxW&&line){x.fillText(line,X,yy);line=ch;yy+=lh}else line=t}if(line)x.fillText(line,X,yy);return yy}
 
@@ -372,7 +491,7 @@ async function makeCard(){if(!lastRes)return;const {code,T,R}=lastRes,out=$('car
   rr(x,150,y+24,780,14,7);x.fillStyle='rgba(61,214,224,.85)';x.fill();
   if(r.pa>0){rr(x,150,y+24,Math.max(14,780*r.pa/100),14,7);x.fillStyle='#8B7CFF';x.fill()}
   y+=130});
- x.textAlign='center';x.fillStyle='rgba(255,255,255,.5)';x.font=`400 30px ${F}`;x.fillText('70개의 장면으로 찾은 나의 궤도',540,1610);
+ x.textAlign='center';x.fillStyle='#c9c2ff';x.font=`600 34px ${F}`;x.fillText(TX[code].kw.join('   '),540,1585);x.fillStyle='rgba(255,255,255,.5)';x.font=`400 30px ${F}`;x.fillText('70개의 장면으로 찾은 나의 궤도',540,1640);
  x.fillStyle='rgba(255,255,255,.75)';x.font=`600 34px ${F}`;x.fillText('너의 궤도는? · JINIVERSE',540,1790);
  x.fillStyle='rgba(255,255,255,.35)';x.font=`400 26px ${F}`;x.fillText('녹녹',540,1840);
  c.toBlob(blob=>{if(!blob){out.innerHTML=`<p class='err'>이 브라우저에서는 카드를 만들 수 없어요</p>`;return}
@@ -385,7 +504,7 @@ function showGallery(){mode='gal';
  paint(backBtn('bk','처음으로')+`<p class='eb' style='margin-top:28px'>내 유형 바로 보기</p><h2 style='margin:10px 0 18px;font-size:26px'>16개의 궤도</h2><div class='g16'>${Object.keys(TY).map(c=>`<button class='tb glass' data-c='${c}'><b>${c}</b><br><span class='mu' style='font-size:13px'>${TY[c][0]}</span></button>`).join('')}</div><div id='gv'></div>${FOOT}`);
  $('bk').onclick=goHome;
  app.querySelectorAll('.tb').forEach(b=>b.onclick=()=>{app.querySelectorAll('.tb').forEach(y=>y.classList.remove('on'));b.classList.add('on');const c=b.dataset.c,t=TY[c];
-  $('gv').innerHTML=`<div class='glass pad fade' style='margin-top:20px;padding:28px 24px'><p class='code' style='font-size:56px;margin-top:0'>${c}</p><p style='font-size:21px;font-weight:700'>${t[0]} <span class='mu' style='font-weight:400;font-size:14px'>${t[1]}</span></p><p class='mu' style='font-size:14px;margin:4px 0 16px'>${t[2]}</p><p style='font-size:16px;line-height:1.85'>${t[3]}</p>${typeBlock(c)}<p class='mu' style='font-size:13px;line-height:1.6;margin-top:16px'>알고 있는 유형이 정말 나와 맞는지는 70문항 검사로 확인해 보세요. 축별 퍼센트와 근거까지 보여드려요.</p></div>`;
+  $('gv').innerHTML=`<div class='glass pad fade' style='margin-top:20px;padding:28px 24px'><p class='code' style='font-size:56px;margin-top:0'>${c}</p><p style='font-size:21px;font-weight:700'>${t[0]} <span class='mu' style='font-weight:400;font-size:14px'>${t[1]}</span></p><p class='mu' style='font-size:14px;margin:4px 0 16px'>${t[2]}</p><p style='font-size:16px;line-height:1.85'>${t[3]}</p>${typeExtra(c,'gal')}${typeBlock(c)}<p class='mu' style='font-size:13px;line-height:1.6;margin-top:16px'>알고 있는 유형이 정말 나와 맞는지는 70문항 검사로 확인해 보세요. 축별 퍼센트와 근거까지 보여드려요.</p></div>`;
   $('gv').scrollIntoView({behavior:'smooth',block:'start'})})}
 
 goHome();
